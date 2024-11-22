@@ -1,0 +1,11 @@
+./src/EmergencyWithdrawer.sol
+./src/FeeAggregator.sol
+./src/FeeRouter.sol
+./src/PausableWithAccessControl.sol
+./src/Reserves.sol
+./src/SwapAutomator.sol
+./src/interfaces/IFeeAggregator.sol
+./src/interfaces/IPausable.sol
+./src/libraries/EnumerableBytesSet.sol
+./src/libraries/Errors.sol
+./src/libraries/Roles.sol
