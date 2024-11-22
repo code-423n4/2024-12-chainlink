@@ -1,21 +1,3 @@
-# Repo setup steps
-
-## Scouting phase notes
-- The scout (technical reviewer) for this audit will make a series of formatting adjustments and review all technical details
-- Meanwhile, the Chainlink team is welcome to begin reviewing the scoping details and make any intended edits to the "Overview" section, via a PR to this repo. 
-
-## ⭐️ Sponsor: Repo checklist
-
-- [ ] Confirm that this repo is a self-contained repository with working commands that will build (at least) all in-scope contracts, and commands that will run tests producing gas reports for the relevant contracts.
-  - [ ] Review the "in scope" and "out of scope" sections and confirm that every file you want audited is included "in scope." *Note: any files not listed as "in scope" will be considered out of scope for the purposes of judging, even if the file will be part of the deployed contracts.*
-  - [ ] Review and confirm the pull request created by the Scout (technical reviewer) who was assigned to your contest. 
-- [ ] Create a PR to this repo with the below changes:
-  - [ ] Modify the [Overview](#overview) section of this `README.md` file. Describe how your code is supposed to work with links to any relevent documentation and any other criteria/details that the auditors should keep in mind when reviewing. (Here are two well-constructed examples: [Ajna Protocol](https://github.com/code-423n4/2023-05-ajna) and [Maia DAO Ecosystem](https://github.com/code-423n4/2023-05-maia))
-- [ ] Check that all README information is in markdown format (HTML does not render on Code4rena.com)
-- [ ] Be prepared for a 🚨code freeze🚨 for the duration of the audit — important because it establishes a level playing field. We want to ensure everyone's looking at the same code, no matter when they look during the audit. (Note: this includes your own repo, since a PR can leak alpha to our wardens!)
-- [ ] Delete this checklist and all text above the line below when you're ready.
-
----
 
 # Chainlink audit details
 - Total Prize Pool: $100,000 in USDC
@@ -61,8 +43,6 @@ Payment Abstraction is a system of onchain smart contracts that aim to reduce pa
 
 ---
 
-# Scope
-
 
 # Scope
 
@@ -90,121 +70,17 @@ Payment Abstraction is a system of onchain smart contracts that aim to reduce pa
 
 *See [out_of_scope.txt](https://github.com/code-423n4/2024-12-chainlink/blob/main/out_of_scope.txt)*
 
-| File         |
-| ------------ |
-| ./src/vendor/@aave/core-v3/contracts/protocol/libraries/math/PercentageMath.sol |
-| ./src/vendor/@chainlink/contracts/src/v0.8/automation/AutomationBase.sol |
-| ./src/vendor/@chainlink/contracts/src/v0.8/automation/AutomationCompatible.sol |
-| ./src/vendor/@chainlink/contracts/src/v0.8/automation/interfaces/AutomationCompatibleInterface.sol |
-| ./src/vendor/@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol |
-| ./src/vendor/@chainlink/contracts/src/v0.8/mocks/MockLinkToken.sol |
-| ./src/vendor/@chainlink/contracts/src/v0.8/shared/interfaces/IERC677Receiver.sol |
-| ./src/vendor/@chainlink/contracts/src/v0.8/shared/interfaces/ITypeAndVersion.sol |
-| ./src/vendor/@chainlink/contracts/src/v0.8/shared/interfaces/LinkTokenInterface.sol |
-| ./src/vendor/@chainlink/contracts/src/v0.8/shared/token/ERC677/IERC677Receiver.sol |
-| ./src/vendor/@chainlink/contracts-ccip/src/v0.8/ccip/applications/CCIPReceiver.sol |
-| ./src/vendor/@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IAny2EVMMessageReceiver.sol |
-| ./src/vendor/@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol |
-| ./src/vendor/@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/automation/ILinkAvailable.sol |
-| ./src/vendor/@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol |
-| ./src/vendor/@uniswap/swap-router-contracts/contracts/interfaces/IV3SwapRouter.sol |
-| ./src/vendor/@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol |
-| ./src/vendor/@uniswap/v3-periphery/contracts/interfaces/IQuoterV2.sol |
-| ./test/Addresses.t.sol |
-| ./test/BaseTest.t.sol |
-| ./test/Constants.t.sol |
-| ./test/fork/BaseForkTest.t.sol |
-| ./test/fork/fee-aggregator/bridge-assets/bridgeAssets.t.sol |
-| ./test/fork/fee-aggregator/ccip-receive/ccipReceive.t.sol |
-| ./test/fork/swap-automator/perform-upkeep/performUpkeep.t.sol |
-| ./test/integration/BaseIntegrationTest.t.sol |
-| ./test/integration/fee-aggregator/emergency-withdraw/emergencyWithdraw.t.sol |
-| ./test/integration/fee-aggregator/transfer-for-swap/transferForSwap.t.sol |
-| ./test/integration/fee-aggregator/withdraw-non-allowlisted-assets/withdrawNonAllowlistedAssets.t.sol |
-| ./test/integration/fee-router/transfer-allowlisted-assets/transferAllowlistedAssets.t.sol |
-| ./test/integration/fee-router/withdraw-non-allowlisted-assets/withdrawNonAllowlistedAssets.t.sol |
-| ./test/integration/reserves/emergency-withdraw/emergencyWithdraw.t.sol |
-| ./test/invariants/BaseInvariant.t.sol |
-| ./test/invariants/Reserves.invariants.t.sol |
-| ./test/invariants/SwapAutomator.invariants.t.sol |
-| ./test/invariants/handlers/AssetHandler.t.sol |
-| ./test/invariants/handlers/ReservesHandler.t.sol |
-| ./test/invariants/handlers/UpkeepHandler.t.sol |
-| ./test/invariants/mocks/MockAggregatorV3.t.sol |
-| ./test/invariants/mocks/MockUniswapQuoterV2.t.sol |
-| ./test/invariants/mocks/MockUniswapRouter.t.sol |
-| ./test/unit/BaseUnitTest.t.sol |
-| ./test/unit/enumerable-bytes-set/add/add.t.sol |
-| ./test/unit/enumerable-bytes-set/remove/remove.t.sol |
-| ./test/unit/fee-aggregator/apply-allowlisted-assets/addAllowlistedAssets.t.sol |
-| ./test/unit/fee-aggregator/apply-allowlisted-assets/removeAllowlistedAssets.t.sol |
-| ./test/unit/fee-aggregator/apply-allowlisted-receivers/addAllowlistedReceivers.t.sol |
-| ./test/unit/fee-aggregator/apply-allowlisted-receivers/removeAllowlistedReceivers.t.sol |
-| ./test/unit/fee-aggregator/apply-allowlisted-senders/addAllowlistedSenders.t.sol |
-| ./test/unit/fee-aggregator/apply-allowlisted-senders/removeAllowlistedSenders.t.sol |
-| ./test/unit/fee-aggregator/ccip-receive/ccipReceive.t.sol |
-| ./test/unit/fee-aggregator/constructor/constructor.t.sol |
-| ./test/unit/fee-aggregator/supports-interface/supportsInterface.t.sol |
-| ./test/unit/fee-router/constructor/constructor.t.sol |
-| ./test/unit/fee-router/set-fee-aggregator/setFeeAggregator.t.sol |
-| ./test/unit/pausable-with-access-control/emergency-pause/emergencyPause.t.sol |
-| ./test/unit/pausable-with-access-control/emergency-unpause/emergencyUnpause.t.sol |
-| ./test/unit/pausable-with-access-control/grant-role/grantRole.t.sol |
-| ./test/unit/pausable-with-access-control/revoke-role/revokeRole.t.sol |
-| ./test/unit/pausable-with-access-control/supports-interface/supportsInterface.t.sol |
-| ./test/unit/reserves/add-allowlisted-service-providers/addAllowlistedServiceProviders.t.sol |
-| ./test/unit/reserves/constructor/constructor.t.sol |
-| ./test/unit/reserves/on-token-transfer/onTokenTransfer.t.sol |
-| ./test/unit/reserves/remove-allowlisted-service-providers/removeAllowlistedServiceProviders.t.sol |
-| ./test/unit/reserves/set-earmarks/setEarmarks.t.sol |
-| ./test/unit/reserves/withdraw/withdraw.t.sol |
-| ./test/unit/swap-automator/apply-asset-swap-params-updates/applyAssetSwapParamsUpdates.t.sol |
-| ./test/unit/swap-automator/check-upkeep/checkUpkeep.t.sol |
-| ./test/unit/swap-automator/constructor/constructor.t.sol |
-| ./test/unit/swap-automator/set-deadline-delay/setDeadlineDelay.t.sol |
-| ./test/unit/swap-automator/set-fee-aggregator-receiver/setFeeAggregatorReceiver.sol |
-| ./test/unit/swap-automator/set-forwarder/setForwarder.t.sol |
-| ./test/unit/swap-automator/set-receiver/setReceiver.t.sol |
-| Totals: 73 |
 
-
-### Files in scope
-- ✅ This should be completed using the `metrics.md` file
-- ✅ Last row of the table should be Total: SLOC
-- ✅ SCOUTS: Have the sponsor review and and confirm in text the details in the section titled "Scoping Q amp; A"
 
 ## Scoping Q &amp; A
 
-### Are there any ERC20's in scope?: Yes
-
-✅ SCOUTS: If the answer above 👆 is "Yes", please add the tokens below 👇 to the table. Otherwise, update the column with "None".
-
-Any (all possible ERC20s)
-ERC-20s, ERC-677 (LINK). See ERC20 token behaviour
-
-### Are there any ERC777's in scope?: No
-
-✅ SCOUTS: If the answer above 👆 is "Yes", please add the tokens below 👇 to the table. Otherwise, update the column with "None".
-
-### Are there any ERC721's in scope?: No
-
-✅ SCOUTS: If the answer above 👆 is "Yes", please add the tokens below 👇 to the table. Otherwise, update the column with "None".
-
-### Are there any ERC1155's in scope?: No
-
-✅ SCOUTS: If the answer above 👆 is "Yes", please add the tokens below 👇 to the table. Otherwise, update the column with "None".
-
-
-
-✅ SCOUTS: Once done populating the table below, please remove all the Q/A data above.
-
 | Question                                | Answer                       |
 | --------------------------------------- | ---------------------------- |
-| ERC20 used by the protocol              |       🖊️             |
-| Test coverage                           | ✅ SCOUTS: Please populate this after running the test coverage command                          |
-| ERC721 used  by the protocol            |            🖊️              |
-| ERC777 used by the protocol             |           🖊️                |
-| ERC1155 used by the protocol            |              🖊️            |
+| ERC20 used by the protocol              |       Any, including ERC-677 (LINK). See ERC20 token behaviour table.             |
+| Test coverage                           | 100.00% (407/407 of lines)                          |
+| ERC721 used  by the protocol            |       None              |
+| ERC777 used by the protocol             |       None                |
+| ERC1155 used by the protocol            |       None            |
 | Chains the protocol will be deployed on | Ethereum,Arbitrum,Avax,Base,BSC,Optimism,Polygon,OtherAny EVM chain, including L2s. The contestants should not consider zkEVM chains and other EVM-like chains (such as TRX).
 
 ### ERC20 token behaviors in scope
@@ -244,12 +120,6 @@ ERC-20s, ERC-677 (LINK). See ERC20 token behaviour
 - EIP-165: All contracts should adhere to ERC-165. supportsInterface functionality should only be added for interfaces where on-chain interactions are expected, as opposed to every interface.
 - EIP-677: Contracts which can receive LINK from other contracts (via a token push model) should support receiving LINK via transferAndCall. The contracts should ignore the data.
 
-✅ SCOUTS: Please format the response above 👆 using the template below👇
-
-| Question                                | Answer                       |
-| --------------------------------------- | ---------------------------- |
-| src/Token.sol                           | ERC20, ERC721                |
-| src/NFT.sol                             | ERC721                       |
 
 
 # Additional context
@@ -288,51 +158,59 @@ The contracts do not present any unique or novel mathematical models. However, t
 For each asset:
 
 1. Determine the balance within the contract assetBalance
-1. Convert the balance to the USD value using Data Feed value assetPrice : availableAssetUsdValue = assetBalance * assetPriceUsd
-1. Retrieve the decimals of the asset assetDecimals , and compute the asset unit: assetUnit = 10 ** assetDecimals
-1. Retrieve the minSwapSizeUsd parameter for the asset. If availableAssetUsdValue < minSwapSize * assetUnit, skip the asset for swapping
-1. Cap the token value for swapping to the upper bound maxSwapSizeUsd parameter: swapAmountIn = min(maxSwapSizeUsd * assetUnit, availableAssetUsdValue) / assetPrice
+1. Convert the balance to the USD value using Data Feed value assetPrice : `availableAssetUsdValue = assetBalance * assetPriceUsd`
+1. Retrieve the decimals of the asset assetDecimals , and compute the asset unit: `assetUnit = 10 ** assetDecimals`
+1. Retrieve the minSwapSizeUsd parameter for the asset. If `availableAssetUsdValue < minSwapSize * assetUnit`, skip the asset for swapping
+1. Cap the token value for swapping to the upper bound maxSwapSizeUsd parameter: `swapAmountIn = min(maxSwapSizeUsd * assetUnit, availableAssetUsdValue) / assetPrice`
 1. Using the USD price of LINK linkUSDPrice, convert the input asset value amount to the equivalent amount out in LINK (note: LINK_DECIMALS = 18):
-   a. When token has < decimals than LINK: amountOutCLPriceFeedQuote = (swapAmountIn * assetPrice * 10 ** (LINK_DECIMALS - assetDecimals)) / linkUSDPrice;
-   b. When token has >= decimals than LINK: (assetAmount * assetPrice) / linkUSDPrice / 10 ** (assetDecimals - LINK_DECIMALS);
+   a. When token has < decimals than LINK: `amountOutCLPriceFeedQuote = (swapAmountIn * assetPrice * 10 ** (LINK_DECIMALS - assetDecimals)) / linkUSDPrice`;
+   b. When token has >= decimals than LINK: `(assetAmount * assetPrice) / linkUSDPrice / 10 ** (assetDecimals - LINK_DECIMALS)`;
 1. Using the preconfigured Uniswap swap path path and the swapAmountIn, perform a Uniswap V3 trade simulation using quoteExactInput, and retrieve the output amountOutUniswapQuote
-1. Using the maxSlippage parameter configured for the asset, if amountOutUniswapQuote < amountOutCLPriceFeedQuote * (1 - maxSlippage), skip the swap
-1. Set amountOutMinimum = max(amountOutCLPriceFeedQuote, amountOutUniswapQuote) * (1 - maxSlippage). This will be the input to exactInput on the actual swap execution
+1. Using the maxSlippage parameter configured for the asset, if `amountOutUniswapQuote < amountOutCLPriceFeedQuote * (1 - maxSlippage)`, skip the swap
+1. Set `amountOutMinimum = max(amountOutCLPriceFeedQuote, amountOutUniswapQuote) * (1 - maxSlippage)`. This will be the input to exactInput on the actual swap execution
 1. After the swap with actualAmountOut, and using the maxDeviation parameter
    a. amountInConvertedToLINKUsdValue - following same steps as 6) with the amountIn input for exactInput
-   b. Revert the trade if the following condition is not met: actualAmountOut >= amountInConvertedToLINKUsdValue * (1 - maxDeviation)
+   b. Revert the trade if the following condition is not met: `actualAmountOut >= amountInConvertedToLINKUsdValue * (1 - maxDeviation)`
 
 ## Running tests
 
+
+
+
+
+Prerequisites:
 1. Setup pnpm: https://pnpm.io/installation
 2. Setup foundry: https://book.getfoundry.sh/getting-started/installation
-3. pnpm foundry
-4. pnpm install
-5. forge build
-6. pnpm test -- --gas-report
-
-✅ SCOUTS: Please format the response above 👆 using the template below👇
+3. For coverage install `lcov` (see https://stackoverflow.com/a/77967141)
 
 ```bash
-git clone https://github.com/code-423n4/2023-08-arbitrum
-git submodule update --init --recursive
-cd governance
-foundryup
-make install
-make build
-make sc-election-test
-```
-To run code coverage
-```bash
-make coverage
-```
-To run gas benchmarks
-```bash
-make gas
+git clone https://github.com/code-423n4/2024-12-chainlink.git
+cd 2024-12-chainlink
+
+cp .env.example .env
+# then set MAINNET_RPC_URL to a valid rpc url
+
+pnpm foundry
+pnpm install
+forge build
+pnpm test
+
+# To get coverage run
+pnpm test:coverage
 ```
 
-✅ SCOUTS: Add a screenshot of your terminal showing the gas report
-✅ SCOUTS: Add a screenshot of your terminal showing the test coverage
+## Coverage
+
+| File                                 | % Lines           | % Statements      | % Branches      | % Funcs         |
+|--------------------------------------|-------------------|-------------------|-----------------|-----------------|
+| src/EmergencyWithdrawer.sol          | 100.00% (13/13)   | 100.00% (15/15)   | 100.00% (4/4)   | 100.00% (4/4)   |
+| src/FeeAggregator.sol                | 100.00% (110/110) | 99.38% (160/161)  | 100.00% (19/19) | 100.00% (18/18) |
+| src/FeeRouter.sol                    | 100.00% (28/28)   | 100.00% (33/33)   | 100.00% (6/6)   | 100.00% (6/6)   |
+| src/PausableWithAccessControl.sol    | 100.00% (14/14)   | 100.00% (20/20)   | 100.00% (2/2)   | 100.00% (9/9)   |
+| src/Reserves.sol                     | 100.00% (49/49)   | 100.00% (66/66)   | 100.00% (11/11) | 100.00% (11/11) |
+| src/SwapAutomator.sol                | 100.00% (163/163) | 100.00% (216/216) | 100.00% (35/35) | 100.00% (26/26) |
+| src/libraries/EnumerableBytesSet.sol | 100.00% (30/30)   | 100.00% (39/39)   | 100.00% (5/5)   | 100.00% (12/12) |
+| Total                                | 100.00% (407/407) | 99.82% (549/550)  | 100.00% (82/82) | 100.00% (86/86) |
 
 ## Miscellaneous
 Employees of Chainlink and employees' family members are ineligible to participate in this audit.
