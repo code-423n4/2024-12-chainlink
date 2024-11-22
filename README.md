@@ -335,6 +335,6 @@ make gas
 ✅ SCOUTS: Add a screenshot of your terminal showing the test coverage
 
 ## Miscellaneous
-Employees of [SPONSOR NAME] and employees' family members are ineligible to participate in this audit.
+Employees of Chainlink and employees' family members are ineligible to participate in this audit.
 
 Code4rena's rules cannot be overridden by the contents of this README. In case of doubt, please check with C4 staff.
