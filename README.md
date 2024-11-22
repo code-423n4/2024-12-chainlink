@@ -37,7 +37,7 @@ Payment Abstraction is a system of onchain smart contracts that aim to reduce pa
 ## Links
 
 - **Previous audits:** none
-- **Documentation:** https://docs.google.com/document/d/1mCBE8bGV1WK0LPMPW5NZhF7BqSwoxJkZyJ1lDkQ39aY/edit?usp=sharing
+- **Documentation:** see [the following document](https://docs.google.com/document/d/1mCBE8bGV1WK0LPMPW5NZhF7BqSwoxJkZyJ1lDkQ39aY/edit?usp=sharing)
 - **Website:** https://chain.link/
 - **X/Twitter:** https://twitter.com/chainlink
 
