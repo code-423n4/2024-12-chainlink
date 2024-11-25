@@ -10,6 +10,14 @@
 - Starts December 6, 2024 20:00 UTC
 - Ends January 3, 2025 20:00 UTC
 
+**Note re: risk level upgrades/downgrades**
+
+Two important notes about judging phase risk adjustments: 
+- High- or Medium-risk submissions downgraded to Low-risk (QA)) will be ineligible for awards.
+- Upgrading a Low-risk finding from a QA report to a Medium- or High-risk finding is not supported.
+
+As such, wardens are encouraged to select the appropriate risk level carefully during the submission phase.
+
 ## Automated Findings / Publicly Known Issues
 
 - **Uniswap swapping strategy:** we acknowledge that the current swapping strategy is not the most efficient one (e.g. we could improve it with smart order routing). The current option to use fixed path swaps instead of smart order routing / DEX Aggregation was an intentional design choice to limit the swap strategies to a permissionless DEX option with minimal off-chain requirements.
