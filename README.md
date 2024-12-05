@@ -153,15 +153,20 @@ Payment Abstraction is a system of onchain smart contracts that aim to reduce pa
 
 ## All trusted roles in the protocol
 
-- UNPAUSER_ROLE, ASSET_MANAGER_ROLE, DEFAULT_ADMIN_ROLE, WITHDRAWER_ROLE, EARMARK_MANAGER_ROLE, SWAPPER_ROLE
-- BRIDGER_ROLE, PAUSER_ROLE, forwarder (s_forwarder). If the role goes malicious, the contracts should not break in a critical way (with the exception of temporary DoS / pausing)
+Note: For BRIDGER_ROLE, PAUSER_ROLE, forwarder (s_forwarder) - if the role goes malicious, the contracts should not break in a critical way (with the exception of temporary DoS / pausing)
 
-✅ 
+See more details about the roles in the [documentaion pdf](https://github.com/code-423n4/2024-12-chainlink/blob/main/payment_abstraction_v0.1.pdf).
 
-| Role                                | Description                       |
-| --------------------------------------- | ---------------------------- |
-| Owner                          | Has superpowers                |
-| Administrator                             | Can change fees                       |
+| Role                 | Description                                                                                                                       |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| DEFAULT_ADMIN        | Owner of the contracts. Manages roles, conﬁgurations, and can emergency withdraw assets.                                          |
+| EARMARK_MANAGER_ROLE | Manages updating Earmarks and the amounts owed for each Service Provider as well as the allowlisted Service Provider list.        |
+| PAUSER_ROLE          | Pauses the contract when an emergency is detected.                                                                                |
+| UNPAUSER_ROLE        | Unpauses the contract when an emergency is resolved. This is separate from the PAUSER_ROLE to decouple the role.                  |
+| BRIDGER_ROLE         | Bridges allowlisted assets on the FeeAggregator contracts across chains.                                                          |
+| SWAPPER_ROLE         | Assigned to SwapAutomator contracts, this role allows for pulling allowlisted assets from FeeAggregator contracts to swap.        |
+| WITHDRAWER_ROLE      | Withdraws non-allowlisted assets from the FeeAggregator contracts..                                                               |
+| ASSET_ADMIN_ROLE     | Manages the list of allowlisted assets on the FeeAggregator contracts. Manages the swap parameters on the SwapAutomator contracts |
 
 ## Describe any novel or unique curve logic or mathematical models implemented in the contracts:
 
