@@ -156,7 +156,7 @@ Payment Abstraction is a system of onchain smart contracts that aim to reduce pa
 - UNPAUSER_ROLE, ASSET_MANAGER_ROLE, DEFAULT_ADMIN_ROLE, WITHDRAWER_ROLE, EARMARK_MANAGER_ROLE, SWAPPER_ROLE
 - BRIDGER_ROLE, PAUSER_ROLE, forwarder (s_forwarder). If the role goes malicious, the contracts should not break in a critical way (with the exception of temporary DoS / pausing)
 
-✅ SCOUTS: Please format the response above 👆 using the template below👇
+✅ 
 
 | Role                                | Description                       |
 | --------------------------------------- | ---------------------------- |
