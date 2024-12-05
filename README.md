@@ -153,7 +153,8 @@ Payment Abstraction is a system of onchain smart contracts that aim to reduce pa
 
 ## All trusted roles in the protocol
 
-Note: For BRIDGER_ROLE, PAUSER_ROLE, forwarder (s_forwarder) - if the role goes malicious, the contracts should not break in a critical way (with the exception of temporary DoS / pausing)
+* UNPAUSER_ROLE, ASSET_MANAGER_ROLE, DEFAULT_ADMIN_ROLE, WITHDRAWER_ROLE, EARMARK_MANAGER_ROLE, SWAPPER_ROLE - highest trust (multi-sig / contract) 
+* BRIDGER_ROLE, PAUSER_ROLE, forwarder (s_forwarder) - high trust, but less trust assumptions. If the role goes malicious, the contracts should not break in a highly critical way (with the exception of temporary DoS / pausing)
 
 See more details about the roles in the [documentaion pdf](https://github.com/code-423n4/2024-12-chainlink/blob/main/payment_abstraction_v0.1.pdf).
 
