@@ -46,7 +46,7 @@ Payment Abstraction is a system of onchain smart contracts that aim to reduce pa
 ## Links
 
 - **Previous audits:** none
-- **Documentation:** see [the following document](payment_abstraction_v0.1.pdf)
+- **Documentation:** see [the following document](https://github.com/code-423n4/2024-12-chainlink/blob/main/payment_abstraction_v0.1.pdf)
 - **Website:** https://chain.link/
 - **X/Twitter:** https://twitter.com/chainlink
 
@@ -59,21 +59,22 @@ Payment Abstraction is a system of onchain smart contracts that aim to reduce pa
 
 ### Files in scope
 
-
-| File   | Logic Contracts | Interfaces | nSLOC | Purpose | Libraries used |
-| ------ | --------------- | ---------- | ----- | -----   | ------------ |
-| /src/EmergencyWithdrawer.sol | 1| **** | 37 | |src/PausableWithAccessControl.sol<br>src/libraries/Errors.sol<br>@openzeppelin/contracts/interfaces/IERC20.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol|
-| /src/FeeAggregator.sol | 1| **** | 261 | |@openzeppelin/contracts/access/IAccessControl.sol<br>@openzeppelin/contracts/access/extensions/IAccessControlDefaultAdminRules.sol<br>@openzeppelin/contracts/access/extensions/IAccessControlEnumerable.sol<br>@openzeppelin/contracts/token/ERC20/IERC20.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol<br>@openzeppelin/contracts/utils/introspection/IERC165.sol<br>src/EmergencyWithdrawer.sol<br>src/PausableWithAccessControl.sol<br>src/interfaces/IFeeAggregator.sol<br>src/libraries/EnumerableBytesSet.sol<br>src/libraries/Errors.sol<br>src/libraries/Roles.sol<br>@chainlink/contracts-ccip/src/v0.8/ccip/applications/CCIPReceiver.sol<br>@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IAny2EVMMessageReceiver.sol<br>@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/IRouterClient.sol<br>@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/automation/ILinkAvailable.sol<br>@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client.sol<br>@chainlink/contracts/src/v0.8/shared/interfaces/ITypeAndVersion.sol<br>@chainlink/contracts/src/v0.8/shared/interfaces/LinkTokenInterface.sol<br>@openzeppelin/contracts/utils/structs/EnumerableSet.sol|
-| /src/FeeRouter.sol | 1| **** | 69 | |src/interfaces/IFeeAggregator.sol<br>src/EmergencyWithdrawer.sol<br>src/libraries/Errors.sol<br>src/libraries/Roles.sol<br>@chainlink/contracts/src/v0.8/shared/interfaces/ITypeAndVersion.sol<br>@openzeppelin/contracts/token/ERC20/IERC20.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol<br>@openzeppelin/contracts/utils/introspection/IERC165.sol|
-| /src/PausableWithAccessControl.sol | 1| **** | 52 | |src/interfaces/IPausable.sol<br>src/libraries/Roles.sol<br>@openzeppelin/contracts/access/extensions/AccessControlDefaultAdminRules.sol<br>@openzeppelin/contracts/access/extensions/IAccessControlEnumerable.sol<br>@openzeppelin/contracts/utils/Pausable.sol<br>@openzeppelin/contracts/utils/structs/EnumerableSet.sol|
-| /src/Reserves.sol | 1| **** | 133 | |src/EmergencyWithdrawer.sol<br>src/libraries/Errors.sol<br>src/libraries/Roles.sol<br>@chainlink/contracts-ccip/src/v0.8/ccip/interfaces/automation/ILinkAvailable.sol<br>@chainlink/contracts/src/v0.8/shared/interfaces/ITypeAndVersion.sol<br>@chainlink/contracts/src/v0.8/shared/token/ERC677/IERC677Receiver.sol<br>@openzeppelin/contracts/interfaces/IERC20.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol<br>@openzeppelin/contracts/utils/structs/EnumerableSet.sol|
-| /src/SwapAutomator.sol | 1| **** | 373 | |src/interfaces/IFeeAggregator.sol<br>src/FeeAggregator.sol<br>src/PausableWithAccessControl.sol<br>src/libraries/Errors.sol<br>src/libraries/Roles.sol<br>@aave/core-v3/contracts/protocol/libraries/math/PercentageMath.sol<br>@chainlink/contracts/src/v0.8/automation/AutomationCompatible.sol<br>@chainlink/contracts/src/v0.8/automation/interfaces/AutomationCompatibleInterface.sol<br>@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol<br>@chainlink/contracts/src/v0.8/shared/interfaces/ITypeAndVersion.sol<br>@chainlink/contracts/src/v0.8/shared/interfaces/LinkTokenInterface.sol<br>@openzeppelin/contracts/interfaces/IERC20.sol<br>@openzeppelin/contracts/interfaces/IERC20Metadata.sol<br>@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol<br>@openzeppelin/contracts/utils/math/Math.sol<br>@openzeppelin/contracts/utils/math/SafeCast.sol<br>@uniswap/swap-router-contracts/contracts/interfaces/IV3SwapRouter.sol<br>@uniswap/v3-periphery/contracts/interfaces/IQuoterV2.sol|
-| /src/interfaces/IFeeAggregator.sol | ****| 1 | 3 | ||
-| /src/interfaces/IPausable.sol | ****| 1 | 3 | ||
-| /src/libraries/EnumerableBytesSet.sol | 1| **** | 68 | ||
-| /src/libraries/Errors.sol | 1| **** | 33 | ||
-| /src/libraries/Roles.sol | 1| **** | 10 | ||
-| **Totals** | **9** | **2** | **1042** | | |
+| File                                 | code     |
+|--------------------------------------|----------|
+| src/SwapAutomator.sol                | 411      |
+| src/FeeAggregator.sol                | 258      |
+| src/Reserves.sol                     | 142      |
+| src/FeeRouter.sol                    | 113      |
+| src/libraries/EnumerableBytesSet.sol | 76       |
+| src/PausableWithAccessControl.sol    | 59       |
+| src/EmergencyWithdrawer.sol          | 55       |
+| src/NativeTokenReceiver.sol          | 41       |
+| src/LinkReceiver.sol                 | 24       |
+| src/libraries/Errors.sol             | 15       |
+| src/libraries/Roles.sol              | 10       |
+| src/interfaces/IFeeAggregator.sol    | 8        |
+| src/interfaces/IPausable.sol         | 5        |
+| **Total**                            | **1217** |
 
 ### Files out of scope
 
@@ -86,7 +87,7 @@ Payment Abstraction is a system of onchain smart contracts that aim to reduce pa
 | Question                                | Answer                       |
 | --------------------------------------- | ---------------------------- |
 | ERC20 used by the protocol              |       Any, including ERC-677 (LINK). See ERC20 token behaviour table.             |
-| Test coverage                           | 100.00% (407/407 of lines)                          |
+| Test coverage                           | 100.00%                          |
 | ERC721 used  by the protocol            |       None              |
 | ERC777 used by the protocol             |       None                |
 | ERC1155 used by the protocol            |       None            |
