@@ -1,4 +1,4 @@
-# Chainlink audit details
+# Chainlink Payment Abstraction audit details
 - Total Prize Pool: $100,000 in USDC
   - HM awards: $80,700 in USDC
   - QA awards: $3,300 in USDC
