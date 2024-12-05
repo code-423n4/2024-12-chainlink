@@ -11,13 +11,14 @@
 
 This repository is provided for code audit purposes only and may not include audit remediations or other updates. This code should not be used in any capacity. For the official version, please refer to https://github.com/smartcontractkit.
 
-**Note re: risk level upgrades/downgrades**
+**IMPORTANT NOTES:** 
 
-Two important notes about judging phase risk adjustments: 
-- High- or Medium-risk submissions downgraded to Low-risk (QA)) will be ineligible for awards.
-- Upgrading a Low-risk finding from a QA report to a Medium- or High-risk finding is not supported.
-
-As such, wardens are encouraged to select the appropriate risk level carefully during the submission phase.
+1. **KYC requirement:** All participants who are eligible to receive awards will be required to become [Certified Contributors](https://docs.code4rena.com/roles/certified-contributors) (successfully complete KYC). When awards are announced, Code4rena staff will provide award-eligible participants with instructions, which must be successfully completed within 30 days of the award announcement date. This applies to all audit participants including wardens, teams, bot crews, judges, lookouts, and scouts.
+2. **Risk level upgrades/downgrades:** Two notes about judging phase risk adjustments: 
+   - High- or Medium-risk submissions downgraded to Low-risk (QA)) will be ineligible for awards.
+   - Upgrading a Low-risk finding from a QA report to a Medium- or High-risk finding is not supported.<br>
+   As such, wardens are encouraged to select the appropriate risk level carefully during the submission phase.
+3. Please note that the findings and audit report will remain private to the sponsor team only.
 
 ## Automated Findings / Publicly Known Issues
 
