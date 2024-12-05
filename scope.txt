@@ -1,6 +1,8 @@
 ./src/EmergencyWithdrawer.sol
 ./src/FeeAggregator.sol
 ./src/FeeRouter.sol
+./src/LinkReceiver.sol
+./src/NativeTokenReceiver.sol
 ./src/PausableWithAccessControl.sol
 ./src/Reserves.sol
 ./src/SwapAutomator.sol

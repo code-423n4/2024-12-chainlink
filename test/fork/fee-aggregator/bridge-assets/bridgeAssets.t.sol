@@ -13,211 +13,212 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
 
 contract BridgeAssetsForkTest is BaseForkTest {
-    uint256 internal constant BRIDGING_FEE = 1 ether;
-    uint256 internal constant USDC_BRIDGED_AMOUNT = 10_000e6;
-    address[] private s_assetsToAllowlist;
-    FeeAggregator.AllowlistedReceivers[] private s_receiversToAllowlist;
-    bytes[] private s_receiverAddresses;
+  uint256 internal constant BRIDGING_FEE = 1 ether;
+  uint256 internal constant USDC_BRIDGED_AMOUNT = 10_000e6;
+  address[] private s_assetsToAllowlist;
+  FeeAggregator.AllowlistedReceivers[] private s_receiversToAllowlist;
+  bytes[] private s_receiverAddresses;
 
-    Client.EVMTokenAmount[] private s_bridgeAssetAmounts;
+  Client.EVMTokenAmount[] private s_bridgeAssetAmounts;
 
-    modifier givenEnoughLinkBalance() {
-        _deal(LINK, address(s_feeAggregatorSender), BRIDGING_FEE);
-        _;
+  modifier givenEnoughLinkBalance() {
+    _deal(LINK, address(s_feeAggregatorSender), BRIDGING_FEE);
+    _;
+  }
+
+  function setUp() public {
+    s_bridgeAssetAmounts.push(Client.EVMTokenAmount({token: USDC, amount: USDC_BRIDGED_AMOUNT}));
+
+    // Deal USDC to the FeeAggregator contract
+    _deal(USDC, address(s_feeAggregatorSender), USDC_BRIDGED_AMOUNT);
+
+    _changePrank(OWNER);
+
+    // Grant ASSET_ADMIN_ROLE to OWNER if not already granted
+    bytes32 assetManagerRole = Roles.ASSET_ADMIN_ROLE;
+    if (!s_feeAggregatorSender.hasRole(assetManagerRole, OWNER)) {
+      s_feeAggregatorSender.grantRole(assetManagerRole, OWNER);
     }
 
-    function setUp() public {
-        s_bridgeAssetAmounts.push(Client.EVMTokenAmount({token: USDC, amount: USDC_BRIDGED_AMOUNT}));
-
-        // Deal USDC to the FeeAggregator contract
-        _deal(USDC, address(s_feeAggregatorSender), USDC_BRIDGED_AMOUNT);
-
-        _changePrank(OWNER);
-
-        // Grant ASSET_ADMIN_ROLE to OWNER if not already granted
-        bytes32 assetManagerRole = Roles.ASSET_ADMIN_ROLE;
-        if (!s_feeAggregatorSender.hasRole(assetManagerRole, OWNER)) {
-            s_feeAggregatorSender.grantRole(assetManagerRole, OWNER);
-        }
-
-        // Grant DEFAULT_ADMIN_ROLE to OWNER if not already granted
-        bytes32 defaultAdminRole = s_feeAggregatorSender.DEFAULT_ADMIN_ROLE();
-        if (!s_feeAggregatorSender.hasRole(defaultAdminRole, OWNER)) {
-            s_feeAggregatorSender.grantRole(defaultAdminRole, OWNER);
-        }
-
-        s_receiverAddresses.push(abi.encodePacked(RECEIVER));
-        s_receiversToAllowlist.push(
-            FeeAggregator.AllowlistedReceivers({
-                destChainSelector: DESTINATION_CHAIN_SELECTOR,
-                receivers: s_receiverAddresses
-            })
-        );
-        FeeAggregator.AllowlistedReceivers[] memory emptyReceivers = new FeeAggregator.AllowlistedReceivers[](0);
-        s_feeAggregatorSender.applyAllowlistedReceivers(emptyReceivers, s_receiversToAllowlist);
-
-        // Grant BRIDGER_ROLE to BRIDGER account
-        bytes32 bridgerRole = Roles.BRIDGER_ROLE;
-        if (!s_feeAggregatorSender.hasRole(bridgerRole, BRIDGER)) {
-            s_feeAggregatorSender.grantRole(bridgerRole, BRIDGER);
-        }
-
-        // Switch to BRIDGER account for the tests
-        _changePrank(BRIDGER);
+    // Grant DEFAULT_ADMIN_ROLE to OWNER if not already granted
+    bytes32 defaultAdminRole = s_feeAggregatorSender.DEFAULT_ADMIN_ROLE();
+    if (!s_feeAggregatorSender.hasRole(defaultAdminRole, OWNER)) {
+      s_feeAggregatorSender.grantRole(defaultAdminRole, OWNER);
     }
 
-    function test_bridgeAssets_RevertWhen_ContractIsPaused()
-        public
-        givenContractIsPaused(address(s_feeAggregatorSender))
-    {
-        bytes memory extraArgs = _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT);
-        vm.expectRevert(Pausable.EnforcedPause.selector);
-        s_feeAggregatorSender.bridgeAssets(
-            s_bridgeAssetAmounts,
-            DESTINATION_CHAIN_SELECTOR,
-            abi.encodePacked(RECEIVER),
-            bytes("test-message"),
-            extraArgs
-        );
+    s_receiverAddresses.push(abi.encodePacked(RECEIVER));
+    s_receiversToAllowlist.push(
+      FeeAggregator.AllowlistedReceivers({
+        remoteChainSelector: DESTINATION_CHAIN_SELECTOR,
+        receivers: s_receiverAddresses
+      })
+    );
+    FeeAggregator.AllowlistedReceivers[] memory emptyReceivers = new FeeAggregator.AllowlistedReceivers[](0);
+    s_feeAggregatorSender.applyAllowlistedReceiverUpdates(emptyReceivers, s_receiversToAllowlist);
+
+    // Grant BRIDGER_ROLE to BRIDGER account
+    bytes32 bridgerRole = Roles.BRIDGER_ROLE;
+    if (!s_feeAggregatorSender.hasRole(bridgerRole, BRIDGER)) {
+      s_feeAggregatorSender.grantRole(bridgerRole, BRIDGER);
     }
 
-    function test_bridgeAssets_RevertWhen_CallerIsNotABridger() public {
-        bytes memory extraArgs = _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT);
-        _changePrank(OWNER);
-        vm.expectRevert(
-            abi.encodeWithSelector(IAccessControl.AccessControlUnauthorizedAccount.selector, OWNER, Roles.BRIDGER_ROLE)
-        );
-        s_feeAggregatorSender.bridgeAssets(
-            s_bridgeAssetAmounts,
-            DESTINATION_CHAIN_SELECTOR,
-            abi.encodePacked(RECEIVER),
-            bytes("test-message"),
-            extraArgs
-        );
+    // Switch to BRIDGER account for the tests
+    _changePrank(BRIDGER);
+  }
+
+  function test_bridgeAssets_RevertWhen_ContractIsPaused() public givenContractIsPaused(address(s_feeAggregatorSender)) {
+    bytes memory extraArgs = _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT);
+    vm.expectRevert(Pausable.EnforcedPause.selector);
+    s_feeAggregatorSender.bridgeAssets(
+      s_bridgeAssetAmounts, DESTINATION_CHAIN_SELECTOR, abi.encodePacked(RECEIVER), extraArgs
+    );
+  }
+
+  function test_bridgeAssets_RevertWhen_CallerIsNotABridger() public {
+    bytes memory extraArgs = _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT);
+    _changePrank(OWNER);
+    vm.expectRevert(
+      abi.encodeWithSelector(IAccessControl.AccessControlUnauthorizedAccount.selector, OWNER, Roles.BRIDGER_ROLE)
+    );
+    s_feeAggregatorSender.bridgeAssets(
+      s_bridgeAssetAmounts, DESTINATION_CHAIN_SELECTOR, abi.encodePacked(RECEIVER), extraArgs
+    );
+  }
+
+  function test_bridgeAssets_RevertWhen_BridgingAssetNotOnAllowlist() public {
+    s_bridgeAssetAmounts[0].token = INVALID_ASSET;
+    bytes memory extraArgs = _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT);
+    vm.expectRevert(abi.encodeWithSelector(Errors.AssetNotAllowlisted.selector, INVALID_ASSET));
+    s_feeAggregatorSender.bridgeAssets(
+      s_bridgeAssetAmounts, DESTINATION_CHAIN_SELECTOR, abi.encodePacked(RECEIVER), extraArgs
+    );
+  }
+
+  function test_bridgeAssets_RevertWhen_ContractCannotPayFee() public {
+    bytes memory extraArgs = _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT);
+    vm.mockCall(CCIP_ROUTER, abi.encodeWithSelector(IRouterClient.getFee.selector), abi.encode(BRIDGING_FEE));
+    vm.expectRevert(
+      abi.encodeWithSelector(
+        FeeAggregator.InsufficientBalance.selector, IERC20(LINK).balanceOf(address(s_feeAggregatorSender)), BRIDGING_FEE
+      )
+    );
+    s_feeAggregatorSender.bridgeAssets(
+      s_bridgeAssetAmounts, DESTINATION_CHAIN_SELECTOR, abi.encodePacked(RECEIVER), extraArgs
+    );
+  }
+
+  function test_bridgeAssets_SendsCorrectDataToCCIPRouter() public givenEnoughLinkBalance {
+    // Assert the contract reports the correct LINK balance
+    assertEq(uint256(s_feeAggregatorSender.linkAvailableForPayment()), BRIDGING_FEE);
+
+    uint64 destinationChainSelector = DESTINATION_CHAIN_SELECTOR;
+    bytes memory bridgeReceiver = abi.encodePacked(address(s_feeAggregatorReceiver));
+    bytes memory extraArgs = _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT);
+
+    Client.EVMTokenAmount[] memory bridgeAssetAmounts = new Client.EVMTokenAmount[](s_bridgeAssetAmounts.length);
+    for (uint256 i = 0; i < s_bridgeAssetAmounts.length; i++) {
+      bridgeAssetAmounts[i] = s_bridgeAssetAmounts[i];
     }
 
-    function test_bridgeAssets_RevertWhen_BridgingAssetNotOnAllowlist() public {
-        s_bridgeAssetAmounts[0].token = INVALID_ASSET;
-        bytes memory extraArgs = _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT);
-        vm.expectRevert(abi.encodeWithSelector(Errors.AssetNotAllowlisted.selector, INVALID_ASSET));
-        s_feeAggregatorSender.bridgeAssets(
-            s_bridgeAssetAmounts,
-            DESTINATION_CHAIN_SELECTOR,
-            abi.encodePacked(RECEIVER),
-            bytes("test-message"),
-            extraArgs
-        );
+    vm.mockCall(CCIP_ROUTER, abi.encodeWithSelector(IRouterClient.ccipSend.selector), abi.encode(bytes32(0x0)));
+
+    vm.expectCall(USDC, abi.encodeWithSelector(IERC20.approve.selector, CCIP_ROUTER, bridgeAssetAmounts[0].amount));
+
+    _changePrank(BRIDGER);
+
+    vm.expectEmit(address(s_feeAggregatorSender));
+    emit FeeAggregator.BridgeAssetsMessageSent(
+      bytes32(0x0),
+      Client.EVM2AnyMessage({
+        receiver: bridgeReceiver,
+        data: "",
+        tokenAmounts: bridgeAssetAmounts,
+        extraArgs: extraArgs,
+        feeToken: LINK
+      })
+    );
+
+    s_feeAggregatorSender.bridgeAssets(bridgeAssetAmounts, destinationChainSelector, bridgeReceiver, extraArgs);
+  }
+
+  function test_bridgeAssets_AllAbts() public {
+    address[] memory allowlistedAssets = s_feeAggregatorSender.getAllowlistedAssets();
+    _deal(LINK, address(s_feeAggregatorSender), BRIDGING_FEE);
+
+    Client.EVMTokenAmount[] memory bridgeAssetAmounts = new Client.EVMTokenAmount[](allowlistedAssets.length);
+
+    for (uint256 i; i < allowlistedAssets.length; ++i) {
+      _dealSwapAmount(allowlistedAssets[i], address(s_feeAggregatorSender), MAX_SWAP_SIZE);
+      bridgeAssetAmounts[i] = Client.EVMTokenAmount({
+        token: allowlistedAssets[i],
+        amount: IERC20(allowlistedAssets[i]).balanceOf(address(s_feeAggregatorSender))
+      });
     }
 
-    function test_bridgeAssets_RevertWhen_ContractCannotPayFee() public {
-        bytes memory extraArgs = _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT);
-        vm.mockCall(CCIP_ROUTER, abi.encodeWithSelector(IRouterClient.getFee.selector), abi.encode(BRIDGING_FEE));
-        vm.expectRevert(
-            abi.encodeWithSelector(
-                Errors.InsufficientBalance.selector,
-                IERC20(LINK).balanceOf(address(s_feeAggregatorSender)),
-                BRIDGING_FEE
-            )
-        );
-        s_feeAggregatorSender.bridgeAssets(
-            s_bridgeAssetAmounts,
-            DESTINATION_CHAIN_SELECTOR,
-            abi.encodePacked(RECEIVER),
-            bytes("test-message"),
-            extraArgs
-        );
-    }
+    // Since we are testing all ABTs on a single chain (fork) not mocking CCIP calls will lead to
+    // reverts because not all ABTs are supported on the same chain
+    vm.mockCall(CCIP_ROUTER, abi.encodeWithSelector(IRouterClient.getFee.selector), abi.encode(BRIDGING_FEE));
+    vm.mockCall(CCIP_ROUTER, abi.encodeWithSelector(IRouterClient.ccipSend.selector), abi.encode(true));
 
-    function test_bridgeAssets_SendsCorrectDataToCCIPRouter() public givenEnoughLinkBalance {
-        // Assert the contract reports the correct LINK balance
-        assertEq(uint256(s_feeAggregatorSender.linkAvailableForPayment()), BRIDGING_FEE);
+    vm.expectEmit(address(s_feeAggregatorSender));
+    emit FeeAggregator.BridgeAssetsMessageSent(
+      bytes32(abi.encode(true)),
+      Client.EVM2AnyMessage({
+        receiver: abi.encodePacked(RECEIVER),
+        data: "",
+        tokenAmounts: bridgeAssetAmounts,
+        extraArgs: _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT),
+        feeToken: LINK
+      })
+    );
 
-        uint64 destinationChainSelector = DESTINATION_CHAIN_SELECTOR;
-        bytes memory bridgeReceiver = abi.encodePacked(address(s_feeAggregatorReceiver));
-        bytes memory data = bytes("test-message");
-        bytes memory extraArgs = _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT);
+    s_feeAggregatorSender.bridgeAssets(
+      bridgeAssetAmounts,
+      DESTINATION_CHAIN_SELECTOR,
+      abi.encodePacked(RECEIVER),
+      _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT)
+    );
+  }
 
-        Client.EVMTokenAmount[] memory bridgeAssetAmounts = new Client.EVMTokenAmount[](s_bridgeAssetAmounts.length);
-        for (uint256 i = 0; i < s_bridgeAssetAmounts.length; i++) {
-            bridgeAssetAmounts[i] = s_bridgeAssetAmounts[i];
-        }
+  function test_bridgeAssets_RevertWhen_BridgingReceiverIsNotOnAllowlist() public {
+    bytes memory extraArgs = _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT);
+    vm.expectRevert(
+      abi.encodeWithSelector(
+        FeeAggregator.ReceiverNotAllowlisted.selector, INVALID_DESTINATION_CHAIN, abi.encodePacked(RECEIVER)
+      )
+    );
+    s_feeAggregatorSender.bridgeAssets(
+      s_bridgeAssetAmounts, INVALID_DESTINATION_CHAIN, abi.encodePacked(RECEIVER), extraArgs
+    );
 
-        vm.mockCall(CCIP_ROUTER, abi.encodeWithSelector(IRouterClient.ccipSend.selector), abi.encode(bytes32(0x0)));
+    address invalidReceiver = address(0);
+    vm.expectRevert(
+      abi.encodeWithSelector(
+        FeeAggregator.ReceiverNotAllowlisted.selector, DESTINATION_CHAIN_SELECTOR, abi.encodePacked(invalidReceiver)
+      )
+    );
+    s_feeAggregatorSender.bridgeAssets(
+      s_bridgeAssetAmounts, DESTINATION_CHAIN_SELECTOR, abi.encodePacked(invalidReceiver), extraArgs
+    );
+  }
 
-        vm.expectCall(USDC, abi.encodeWithSelector(IERC20.approve.selector, CCIP_ROUTER, bridgeAssetAmounts[0].amount));
+  function test_bridgeAssets_RevertWhen_BridgedAssetListIsEmpty() public {
+    _deal(LINK, address(s_feeAggregatorSender), BRIDGING_FEE);
 
-        _changePrank(BRIDGER);
-        s_feeAggregatorSender.bridgeAssets(
-            bridgeAssetAmounts,
-            destinationChainSelector,
-            bridgeReceiver,
-            data,
-            extraArgs
-        );
-    }
+    Client.EVMTokenAmount[] memory bridgeAssetAmounts = new Client.EVMTokenAmount[](0);
 
-    function test_bridgeAssets_AllAbts() public {
-        address[] memory allowlistedAssets = s_feeAggregatorSender.getAllowlistedAssets();
-        _deal(LINK, address(s_feeAggregatorSender), BRIDGING_FEE);
+    vm.expectRevert(Errors.EmptyList.selector);
+    s_feeAggregatorSender.bridgeAssets(
+      bridgeAssetAmounts,
+      DESTINATION_CHAIN_SELECTOR,
+      abi.encodePacked(RECEIVER),
+      _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT)
+    );
+  }
 
-        Client.EVMTokenAmount[] memory bridgeAssetAmounts = new Client.EVMTokenAmount[](allowlistedAssets.length);
-
-        for (uint256 i; i < allowlistedAssets.length; ++i) {
-            _dealSwapAmount(allowlistedAssets[i], address(s_feeAggregatorSender), MAX_SWAP_SIZE);
-            bridgeAssetAmounts[i] = Client.EVMTokenAmount({
-                token: allowlistedAssets[i],
-                amount: IERC20(allowlistedAssets[i]).balanceOf(address(s_feeAggregatorSender))
-            });
-        }
-
-        // Since we are testing all ABTs on a single chain (fork) not mocking CCIP calls will lead to
-        // reverts because not all ABTs are supported on the same chain
-        vm.mockCall(CCIP_ROUTER, abi.encodeWithSelector(IRouterClient.getFee.selector), abi.encode(BRIDGING_FEE));
-        vm.mockCall(CCIP_ROUTER, abi.encodeWithSelector(IRouterClient.ccipSend.selector), abi.encode(true));
-        s_feeAggregatorSender.bridgeAssets(
-            bridgeAssetAmounts,
-            DESTINATION_CHAIN_SELECTOR,
-            abi.encodePacked(RECEIVER),
-            "",
-            _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT)
-        );
-    }
-
-    function test_bridgeAssets_RevertWhen_BridgingReceiverIsNotOnAllowlist() public {
-        bytes memory extraArgs = _encodeExtraArgs(DESTINATION_CHAIN_GAS_LIMIT);
-        vm.expectRevert(
-            abi.encodeWithSelector(
-                Errors.ReceiverNotAllowlisted.selector,
-                INVALID_DESTINATION_CHAIN,
-                abi.encodePacked(RECEIVER)
-            )
-        );
-        s_feeAggregatorSender.bridgeAssets(
-            s_bridgeAssetAmounts,
-            INVALID_DESTINATION_CHAIN,
-            abi.encodePacked(RECEIVER),
-            bytes("test-message"),
-            extraArgs
-        );
-
-        address invalidReceiver = address(0);
-        vm.expectRevert(
-            abi.encodeWithSelector(
-                Errors.ReceiverNotAllowlisted.selector,
-                DESTINATION_CHAIN_SELECTOR,
-                abi.encodePacked(invalidReceiver)
-            )
-        );
-        s_feeAggregatorSender.bridgeAssets(
-            s_bridgeAssetAmounts,
-            DESTINATION_CHAIN_SELECTOR,
-            abi.encodePacked(invalidReceiver),
-            bytes("test-message"),
-            extraArgs
-        );
-    }
-
-    function _encodeExtraArgs(uint256 gasLimit) internal pure returns (bytes memory) {
-        return Client._argsToBytes(Client.EVMExtraArgsV1({gasLimit: gasLimit}));
-    }
+  function _encodeExtraArgs(
+    uint256 gasLimit
+  ) internal pure returns (bytes memory) {
+    return Client._argsToBytes(Client.EVMExtraArgsV1({gasLimit: gasLimit}));
+  }
 }

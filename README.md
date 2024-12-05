@@ -1,4 +1,3 @@
-
 # Chainlink audit details
 - Total Prize Pool: $100,000 in USDC
   - HM awards: $80,700 in USDC
@@ -9,6 +8,8 @@
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
 - Starts December 6, 2024 20:00 UTC
 - Ends January 3, 2025 20:00 UTC
+
+This repository is provided for code audit purposes only and may not include audit remediations or other updates. This code should not be used in any capacity. For the official version, please refer to https://github.com/smartcontractkit.
 
 **Note re: risk level upgrades/downgrades**
 
@@ -45,7 +46,7 @@ Payment Abstraction is a system of onchain smart contracts that aim to reduce pa
 ## Links
 
 - **Previous audits:** none
-- **Documentation:** see [the following document](https://docs.google.com/document/d/1mCBE8bGV1WK0LPMPW5NZhF7BqSwoxJkZyJ1lDkQ39aY/edit?usp=sharing)
+- **Documentation:** see [the following document](payment_abstraction_v0.1.pdf)
 - **Website:** https://chain.link/
 - **X/Twitter:** https://twitter.com/chainlink
 
@@ -211,14 +212,15 @@ pnpm test:coverage
 
 | File                                 | % Lines           | % Statements      | % Branches      | % Funcs         |
 |--------------------------------------|-------------------|-------------------|-----------------|-----------------|
-| src/EmergencyWithdrawer.sol          | 100.00% (13/13)   | 100.00% (15/15)   | 100.00% (4/4)   | 100.00% (4/4)   |
-| src/FeeAggregator.sol                | 100.00% (110/110) | 99.38% (160/161)  | 100.00% (19/19) | 100.00% (18/18) |
-| src/FeeRouter.sol                    | 100.00% (28/28)   | 100.00% (33/33)   | 100.00% (6/6)   | 100.00% (6/6)   |
-| src/PausableWithAccessControl.sol    | 100.00% (14/14)   | 100.00% (20/20)   | 100.00% (2/2)   | 100.00% (9/9)   |
-| src/Reserves.sol                     | 100.00% (49/49)   | 100.00% (66/66)   | 100.00% (11/11) | 100.00% (11/11) |
-| src/SwapAutomator.sol                | 100.00% (163/163) | 100.00% (216/216) | 100.00% (35/35) | 100.00% (26/26) |
-| src/libraries/EnumerableBytesSet.sol | 100.00% (30/30)   | 100.00% (39/39)   | 100.00% (5/5)   | 100.00% (12/12) |
-| Total                                | 100.00% (407/407) | 99.82% (549/550)  | 100.00% (82/82) | 100.00% (86/86) |
+| src/EmergencyWithdrawer.sol          | 100.00% (22/22)   | 100.00% (27/27)   | 100.00% (7/7)    | 100.00% (6/6)    |
+| src/FeeAggregator.sol                | 100.00% (92/92)   | 100.00% (125/125) | 100.00% (18/18)  | 100.00% (16/16)  |
+| src/FeeRouter.sol                    | 100.00% (42/42)   | 100.00% (48/48)   | 100.00% (7/7)    | 100.00% (8/8)    |
+| src/LinkReceiver.sol                 | 100.00% (6/6)     | 100.00% (7/7)     | 100.00% (2/2)    | 100.00% (3/3)    |
+| src/NativeTokenReceiver.sol          | 100.00% (10/10)   | 100.00% (10/10)   | 100.00% (3/3)    | 100.00% (4/4)    |
+| src/PausableWithAccessControl.sol    | 100.00% (14/14)   | 100.00% (20/20)   | 100.00% (2/2)    | 100.00% (9/9)    |
+| src/Reserves.sol                     | 100.00% (47/47)   | 100.00% (66/66)   | 100.00% (12/12)  | 100.00% (9/9)    |
+| src/SwapAutomator.sol                | 100.00% (158/158) | 100.00% (221/221) | 100.00% (36/36)  | 100.00% (26/26)  |
+| src/libraries/EnumerableBytesSet.sol | 100.00% (30/30)   | 100.00% (39/39)   | 100.00% (5/5)    | 100.00% (12/12)  |
 
 ## Miscellaneous
 Employees of Chainlink and employees' family members are ineligible to participate in this audit.
