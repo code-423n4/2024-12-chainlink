@@ -167,7 +167,7 @@ contract SwapAutomator is ITypeAndVersion, PausableWithAccessControl, Automation
   uint96 private s_deadlineDelay;
   /// @notice The fee aggregator
   IFeeAggregator private s_feeAggregator;
-  /// @notice Mapping of assets to their swap parameters
+  /// @notice Mapping of assets to their swap parameters/Misleading comment
   address private s_linkReceiver;
 
   /// @notice Mapping of assets to their swap parameters

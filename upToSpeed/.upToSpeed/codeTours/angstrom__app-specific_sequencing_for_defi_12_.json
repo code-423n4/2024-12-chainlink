@@ -1,0 +1,148 @@
+{
+  "title": "Angstrom: App-Specific Sequencing for DeFi",
+  "id": "LtAmdcCemK4mr3zt3xFBrcnlgilwlhn5VK1xerFeobI=",
+  "position": 1,
+  "steps": [
+    {
+      "type": "revealFiles",
+      "files": ["contracts/docs/overview.md"],
+      "description": "The Angstrom project implements Application-Specific Sequencing (ASS) for DeFi applications, focusing on mitigating MEV (Maximal Extractable Value) for users and liquidity providers. It aims to create a trustless, hybrid AMM/Orderbook exchange that settles on Ethereum. The project uses batch clearing mechanisms at uniform prices to ensure fair treatment and limit extraction.\n\nRecommend reading this whole file before moving on.",
+      "title": "",
+      "id": "229"
+    },
+    {
+      "type": "highlight",
+      "description": "The `Angstrom` contract is the central component of the project. It inherits from multiple modules including `UniConsumer`, `TopLevelAuth`, `PoolUpdates`, `Settlement`, and `OrderInvalidation`. This structure allows for a modular approach to implementing the various functionalities required for ASS.",
+      "file": "contracts/src/Angstrom.sol",
+      "highlight": [{ "start": 1, "end": 45 }],
+      "title": "",
+      "id": "230"
+    },
+    {
+      "type": "highlight",
+      "description": "The `execute` function is the main entry point for processing bundles. It uses a `_nodeBundleLock()` mechanism to ensure exclusive access during execution and interacts with Uniswap V4 through the `UNI_V4.unlock(encoded)` call. This function is where the Application-Specific Sequencing logic is applied to incoming transactions.",
+      "file": "contracts/src/Angstrom.sol",
+      "highlight": [{ "start": 47, "end": 50 }],
+      "title": "",
+      "id": "231"
+    },
+    {
+      "type": "highlight",
+      "description": "The `_updatePool` function is part of the PoolUpdates module. It processes individual pool updates, handling tasks such as swaps, updating ticks and liquidity, and distributing rewards. This function plays a role in maintaining the state of liquidity pools in the ASS system.",
+      "file": "contracts/src/modules/PoolUpdates.sol",
+      "highlight": [{ "start": 171, "end": 215 }],
+      "title": "",
+      "id": "232"
+    },
+    {
+      "type": "highlight",
+      "description": "The function begins by decoding the `PoolUpdateVariantMap` from the input `reader`. It then sets up the `swapCall` parameters, including the `zeroForOne` flag and pool information. This initial setup prepares the necessary data for the subsequent pool operations.",
+      "file": "contracts/src/modules/PoolUpdates.sol",
+      "highlight": [{ "start": 175, "end": 190 }],
+      "title": "",
+      "id": "233"
+    },
+    {
+      "type": "highlight",
+      "description": "If `amountIn` is greater than zero, the function executes a swap against the Uniswap V4 pool. It records the tick before and after the swap, which is used for updating reward accumulators. The `swapCall.call(UNI_V4)` line executes the actual swap on the Uniswap V4 contract.",
+      "file": "contracts/src/modules/PoolUpdates.sol",
+      "highlight": [{ "start": 193, "end": 199 }],
+      "title": "",
+      "id": "234"
+    },
+    {
+      "type": "highlight",
+      "description": "After a swap, the function updates the pool rewards using the `updateAfterTickMove` method. This update accounts for any tick crossings that occurred during the swap, ensuring that reward accumulators are correctly adjusted for the new pool state.",
+      "file": "contracts/src/modules/PoolUpdates.sol",
+      "highlight": [{ "start": 201, "end": 203 }],
+      "title": "",
+      "id": "235"
+    },
+    {
+      "type": "highlight",
+      "description": "The function concludes by calling `_decodeAndReward` to distribute rewards based on the current pool state. The total rewards are then subtracted from the `bundleDeltas` for the pool's `asset0`. This ensures that rewards are properly accounted for in the overall bundle execution.",
+      "file": "contracts/src/modules/PoolUpdates.sol",
+      "highlight": [{ "start": 208, "end": 212 }],
+      "title": "",
+      "id": "236"
+    },
+    {
+      "type": "highlight",
+      "description": "The `PoolRewards` structure stores reward-related data for each pool. It includes `rewardGrowthOutside` for tracking rewards outside specific price ranges, and `globalGrowth` for overall reward accumulation. This structure is fundamental to the reward distribution mechanism in the ASS implementation.",
+      "file": "contracts/src/types/PoolRewards.sol",
+      "highlight": [{ "start": 12, "end": 15 }],
+      "title": "",
+      "id": "237"
+    },
+    {
+      "type": "highlight",
+      "description": "The `DeltaTracker` structure is used to track intermediate value changes in the contract. It uses a mapping of assets to transient int256 values (`tint256`) to keep track of net balances. This tracker ensures solvency and manages fund allocation for payouts, which is critical for maintaining the financial integrity of the ASS system.",
+      "file": "contracts/src/types/DeltaTracker.sol",
+      "highlight": [{ "start": 7, "end": 9 }],
+      "title": "",
+      "id": "238"
+    },
+    {
+      "type": "highlight",
+      "description": "The `_saveAndSettle` function in the Settlement module processes final settlements for assets. It iterates through an array of assets, calculates fees, settles assets with Uniswap V4, and emits a log for fee summaries. This function ensures proper settlement of all transactions and correct fee distribution in the ASS system.",
+      "file": "contracts/src/modules/Settlement.sol",
+      "highlight": [{ "start": 62, "end": 100 }],
+      "title": "",
+      "id": "239"
+    },
+    {
+      "type": "highlight",
+      "description": "The function begins by allocating memory for a fee summary buffer. It uses inline assembly to efficiently allocate memory based on the number of assets and a predefined `FEE_SUMMARY_ENTRY_SIZE`. This buffer will be used to store fee information for each asset processed.",
+      "file": "contracts/src/modules/Settlement.sol",
+      "highlight": [{ "start": 65, "end": 71 }],
+      "title": "",
+      "id": "240"
+    },
+    {
+      "type": "highlight",
+      "description": "The function iterates through each asset in the `assets` array. For each asset, it retrieves the asset's address, saving amount, and settlement amount. It then checks if the bundle delta for the asset is resolved correctly, reverting if not. This ensures that all asset movements are accounted for accurately.",
+      "file": "contracts/src/modules/Settlement.sol",
+      "highlight": [{ "start": 73, "end": 81 }],
+      "title": "",
+      "id": "241"
+    },
+    {
+      "type": "highlight",
+      "description": "If an asset has a positive settlement amount, the function interacts with Uniswap V4. It first calls `UNI_V4.sync()` to update the pool state, then transfers the settlement amount to Uniswap V4, and finally calls `UNI_V4.settle()`. This process ensures that the asset is properly settled within the Uniswap V4 ecosystem.",
+      "file": "contracts/src/modules/Settlement.sol",
+      "highlight": [{ "start": 83, "end": 87 }],
+      "title": "",
+      "id": "242"
+    },
+    {
+      "type": "highlight",
+      "description": "After processing each asset, the function records a fee entry in the previously allocated fee summary buffer. It calls `asset.raw_copyFeeEntryToMemory()` to copy the fee information to the buffer and then increments the buffer pointer. This step records all fees processed during the settlement.",
+      "file": "contracts/src/modules/Settlement.sol",
+      "highlight": [{ "start": 89, "end": 92 }],
+      "title": "",
+      "id": "243"
+    },
+    {
+      "type": "highlight",
+      "description": "After processing all assets, the **function** emits a **unique log** containing a hash of the **fee summary buffer**. It uses inline assembly to efficiently compute the `keccak256` hash of the buffer and emit it as a log. This log serves as a record of all fees processed in this settlement operation, providing transparency and auditability.",
+      "file": "contracts/src/modules/Settlement.sol",
+      "highlight": [{ "start": 95, "end": 99 }],
+      "title": "",
+      "id": "244"
+    },
+    {
+      "type": "highlight",
+      "description": "The `TopOfBlockOrder` structure represents orders that are executed at the top of each block. It includes fields for input and output quantities, gas limits, asset addresses, and validity parameters. This structure is used in the ASS implementation to allow for controlled ordering of transactions at the beginning of each block, which can help mitigate MEV.",
+      "file": "contracts/test/_reference/OrderTypes.sol",
+      "highlight": [{ "start": 99, "end": 110 }],
+      "title": "",
+      "id": "245"
+    },
+    {
+      "type": "textOnly",
+      "description": "The `Angstrom` project implements Application-Specific Sequencing through a combination of smart contract modules and data structures. It focuses on controlling transaction ordering, managing pool updates, and implementing reward distribution mechanisms. The project aims to address **MEV** (Maximal Extractable Value) issues and provide outcomes for DeFi users and liquidity providers. The modular design of `Angstrom` allows for handling of complex DeFi operations. By controlling various aspects of transaction processing and pool management, the project seeks to create an environment for DeFi participants that alters how transactions are processed and rewards are distributed.",
+      "title": "",
+      "id": "246"
+    }
+  ]
+}
