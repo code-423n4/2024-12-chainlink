@@ -1,0 +1,1241 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-PUBLIC / chainlink-payment-dec
+==============================================================
+
+[12/05/2024 11:44] cloudellie
+👋 Hello and welcome to the $100,000 in USDC Chainlink Payment Abstraction audit channel!
+
+📆 Audit opens Friday, 06 December 2024 (20:00 UTC) and runs through Friday, 03 January 2025 (20:00 UTC) (28 days).
+
+Please give a warm welcome to the Chainlink team, particularly @Ryan, @Evaldas | Chainlink Labs, and @cll_seanw, who will be available for questions either here in the channel or via a private thread. 
+
+**Q&A availability notes**
+- The sponsor team members are in European and Asian time zones; you can expect responses during their work hours.
+- They will *not* be answering warden questions between December 21st - January 2nd 🎅
+
+🤖 **Documentation bot assistance:** For general questions about the codebase, give our documentation bot a try, by tagging `@Docs Wolf` in any thread (private or public) and asking your question. The bot will make its best attempt to answer based on the codebase and documentation, and link you to relevant resources.  
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this audit, consider enabling notifications for this channel. 🐺 ⏰
+
+Audit Page: https://code4rena.com/audits/2024-12-chainlink-payment-abstraction
+
+{Reactions}
+✅ (10) 🫡 (6) 
+
+[12/07/2024 16:23] oblivionis_30694
+Hi @CloudEllie How can we complete KYC for this contest? C4 frontend says `Certified contributor application form is temporarily disabled`
+
+
+[12/07/2024 16:36] cloudellie
+C4 staff will contact all wardens listed in the award announcement to arrange KYC - it doesn't need to be done in advance.
+
+{Reactions}
+✅ (3) 
+
+[12/08/2024 01:08] shahen.0000
+Hey, i got kycd (certified contributor thingy) some months ago, Will i need to do it again?
+
+
+[12/08/2024 09:06] cloudellie
+No, if you’re already certified, you’re good!
+
+{Reactions}
+❤️ 
+
+[12/09/2024 05:32] glightspeed
+Is gas optimization in-scope?
+
+
+[12/09/2024 07:42] mushow
+Gas optimization is part of QA awards pool, only the top 3 best reports will be selected and awarded from that pool. If no H/M are found, the total QA will be shared amongst all participants. More information: https://docs.code4rena.com/awarding/incentive-model-and-awards#ranks-for-qa-and-gas-reports
+
+{Embed}
+https://docs.code4rena.com/awarding/incentive-model-and-awards
+Incentive model and awards | Code4rena
+
+
+[12/09/2024 07:49] glightspeed
+According to the same doc, "The gas optimization pool varies from audit to audit;". I'm asking coz this audit mentions nothing about gas pool.
+https://docs.code4rena.com/awarding/incentive-model-and-awards#qa-and-gas-optimization-reports
+
+{Embed}
+https://docs.code4rena.com/awarding/incentive-model-and-awards
+Incentive model and awards | Code4rena
+
+
+[12/09/2024 07:51] mushow
+No audit on C4 mention gas pool, it takes part of QA. (from what I've seen).
+
+{Reactions}
+🫡 (2) 
+
+[12/09/2024 07:52] glightspeed
+But I'll need to create QA and gas reports separately, right?
+
+{Reactions}
+👍 
+
+[12/09/2024 09:08] cloudellie
+There’s no gas optimization pool for this audit.  Gas reports are therefore out of scope.
+
+{Reactions}
+👍 
+
+[12/09/2024 09:09] cloudellie
+This is not correct. If a sponsor wishes to receive gas reports, a separate gas award pool will be posted. 
+
+QA reports should include Low-risk findings only.
+
+
+[12/09/2024 09:09] mushow
+Thank you for clarification.
+
+{Reactions}
+👍 
+
+[12/09/2024 09:10] mushow
+QA consists of Informational too? Included them in another contest
+
+
+[12/09/2024 09:42] glightspeed
+What's the purpose of FeeRouter? I find it hard to understand the following statement:
+> The contract prevents automatic flow of fees into the payment abstraction system on local chains
+
+
+[12/09/2024 09:43] cloudellie
+https://docs.code4rena.com/roles/wardens/submission-guidelines#qa-reports-low-governance
+
+{Attachments}
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/image-2ED05.png
+
+{Embed}
+https://docs.code4rena.com/roles/wardens/submission-guidelines
+Submission guidelines | Code4rena
+
+
+[12/09/2024 09:44] glightspeed
+cc @Ryan @Evaldas | Chainlink Labs @cll_seanw
+
+
+[12/09/2024 09:47] mushow
+Thanks, can I DM?
+
+
+[12/09/2024 19:13] ._rolando_.
+Hey everyone! 🌟 
+
+Who's ready to team up?
+
+I'm looking for a Senior/Pro/Top-Tier legend because I want to learn from them.
+I'm searching for someone who's better than me – someone 100% responsible, committed, and eager to collaborate.
+
+Who said me? 🌟
+
+{Reactions}
+👍 
+
+[12/09/2024 20:59] debof_
+I can help, but I'm not so consistent? I'm an SR though.
+
+
+[12/09/2024 21:01] ._rolando_.
+Yeah! Why not!
+I send you a DM
+
+{Reactions}
+👍 
+
+[12/09/2024 23:48] irving6969
+BRIDGER_ROLE, PAUSER_ROLE, forwarder (s_forwarder) can be malicious ??
+
+
+[12/10/2024 08:22] mgnfy_view
+Nope
+
+
+[12/10/2024 08:50] 0xlemon
+If you can find a scenario where it leads to permanent loss of funds or critically breaking the system then it should be a valid finding, but if it is just a temporary DoS - no
+
+{Reactions}
+👍 (2) 
+
+[12/11/2024 03:36] anmol.eth
+is there any test where we can see the transfer of funds from service contract to feeRouter ?
+
+
+[12/11/2024 05:35] cll_rayxpub_56427
+no the logic of the service contracts to transfer funds to the fee router is out of scope. The payment abstraction contracts are agnostic to such logic.
+
+
+[12/13/2024 09:17] mgnfy_view
+What a nice, solid codebase
+
+{Reactions}
+🙏 (5) 
+
+[12/15/2024 15:29] nuntax
+Will the wrapped token of a chains native token always be allowlisted? E.g. will weth be allowlisted on ethereum, will wpol be allowlisted on pol?
+
+
+[12/17/2024 06:26] cll_rayxpub_56427
+Not necessarily, tokens will be assessed on a case by case basis
+
+
+[12/17/2024 23:06] cloudellie (pinned)
+@🐺Wardens just a reminder that the Chainlink team will be out of office for the holidays from Dec 21 - Jan 2 (as noted in the welcome post in this channel). 
+
+Since submissions close Jan 3, we recommend asking your questions this week!
+
+{Reactions}
+✅ (6) 
+
+[12/17/2024 23:06] cloudellie
+Pinned a message.
+
+
+[12/18/2024 00:48] lookman6596
+@Evaldas | Chainlink Labs @Ryan can link token be part of the tokens to be bridged to another chain in `fee aggregator::bridgeAssets`
+
+
+[12/18/2024 06:36] dinesh11g
+have anyone drawn simple architecture for this project ?
+
+
+[12/18/2024 08:05] cll_rayxpub_56427
+yes
+
+
+[12/23/2024 05:54] sa259_888
+hi
+
+
+[12/23/2024 08:42] tapir31
+d
+
+
+[12/23/2024 19:04] nem0thefinder
+hi guys do you recommend joining the contest now or it will  be waste of time espically i'm new
+
+
+[12/23/2024 19:21] ivanfitro
+i think with 11 days you have time to understand it, i recommend it because uses UNI V3, CCIP and price feeds that are very interesting concepts. If i were you i will use this contest to investigate this concepts.
+
+{Reactions}
+🫡 (2) 
+
+[12/24/2024 09:34] 0xrochimaru
+Where is the implementation of _ccipReceive in `FeeAggregator.sol`?
+
+
+[12/24/2024 11:20] mgnfy_view
+Since the `FeeAggregator` only conducts token transfers and not cross-chain messaging, it's not required.
+
+{Reactions}
+✅ (2) 
+
+[12/24/2024 11:21] mgnfy_view
+What's the meaning of `juels` here?
+
+```js
+/// @notice Helper function to convert an asset amount to Juels denomination
+  /// @param assetAmount The amount to convert
+  /// @param asset The asset to convert
+  /// @param assetPrice The asset price in USD
+  /// @param linkUSDPrice The LINK price in USD
+  /// @return linkAmount The converted amount in Juels
+  /* solhint-disable-next-line chainlink-solidity/explicit-returns */
+  function _convertToLink(
+    uint256 assetAmount,
+    uint256 assetPrice,
+    uint256 linkUSDPrice,
+    IERC20Metadata asset
+  ) private view returns (uint256 linkAmount) {
+    uint256 tokenDecimals = asset.decimals();
+
+    if (tokenDecimals < LINK_DECIMALS) {
+      return (assetAmount * assetPrice * 10 ** (LINK_DECIMALS - tokenDecimals)) / linkUSDPrice;
+    } else {
+      return (assetAmount * assetPrice) / linkUSDPrice / 10 ** (tokenDecimals - LINK_DECIMALS);
+    }
+  }
+```
+
+
+[12/24/2024 11:23] 0xrochimaru
+
+
+{Attachments}
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/Screenshot_2024-12-24_at_4.53.25_PM-26082.png
+
+
+[12/24/2024 11:23] 0xrochimaru
+As per their docs: https://github.com/code-423n4/2024-12-chainlink/blob/main/payment_abstraction_v0.1.pdf
+
+
+[12/24/2024 11:24] mgnfy_view
+Thanks!
+
+{Reactions}
+🫂 
+
+[12/25/2024 11:14] saurabh_0312
+the code is very clear and clean, not found anything till now
+
+{Reactions}
+10_10 (2) 
+
+[12/25/2024 11:15] saurabh_0312
+has anyone found something ??
+
+
+[12/25/2024 12:05] 0xrochimaru
+I love such codebases. We actually get to learn when we see the results of such contests.
+
+{Reactions}
+👍 (3) 
+
+[12/25/2024 21:03] kann_p
+hello guys I was looking to this protocol can anyone tell me where can I find RouterClient contract
+
+
+[12/25/2024 21:03] kann_p
+since I see its being passed by reference in FeeAggregator
+
+
+[12/26/2024 03:42] 0xrochimaru
+https://github.com/smartcontractkit/ccip/blob/ccip-develop/contracts/src/v0.8/ccip/Router.sol
+
+It's chainlink ccip integration contracts. You can read the CCIP docs here
+https://docs.chain.link/ccip/tutorials/transfer-tokens-from-contract
+
+{Embed}
+https://github.com/smartcontractkit/ccip/blob/ccip-develop/contracts/src/v0.8/ccip/Router.sol
+ccip/contracts/src/v0.8/ccip/Router.sol at ccip-develop · smartcont...
+Cross Chain Interoperability Protocol. Contribute to smartcontractkit/ccip development by creating an account on GitHub.
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/ccip-5635C
+
+{Embed}
+https://docs.chain.link/ccip/tutorials/transfer-tokens-from-contract
+Chainlink Documentation | Chainlink Documentation
+Simple, clean, and comprehensive documentation for any developer to learn, experiment, and build with the Chainlink platform. Start building now.
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/og-E189E.png
+
+{Reactions}
+🔥 
+
+[12/26/2024 09:24] kann_p
+thanks
+
+
+[12/27/2024 17:49] donkicha
+I think that the results from this contest will be private
+
+{Reactions}
+✅ 
+
+[12/28/2024 03:50] saurabh_0312
+Are there any H/M in this codebase.
+
+
+[12/28/2024 06:14] shubu25
+Has anyone found any bug till now
+
+
+[12/28/2024 06:43] _karanel
+No point in asking this. Even if someone finds anything, they won't give a hint for you to look harder.
+
+{Reactions}
+😀 (4) 
+
+[12/28/2024 08:42] saurabh_0312
+Try hard
+
+
+[12/29/2024 06:04] 0xhuntoor
+i love chainLink
+
+
+[12/29/2024 09:10] 0x_shahil_hussain
+https://tenor.com/view/bogdanoff-he-sold-pump-it-gif-23606817
+
+{Embed}
+https://tenor.com/view/bogdanoff-he-sold-pump-it-gif-23606817
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/bogdanoff-he-sold-8DE3C.png
+
+{Reactions}
+😂 (4) 
+
+[12/30/2024 03:43] _heeze
+Saw the acronym "ADTs" being used in the code documentation, anyone know what it means?
+
+
+[12/30/2024 05:52] _karanel
+I think that's a typo for "ABT (Accepted Billing Token)" as per this doc:
+https://github.com/code-423n4/2024-12-chainlink/blob/main/payment_abstraction_v0.1.pdf
+
+{Reactions}
+👍 
+
+[12/30/2024 09:28] anmol.eth
+Giving up soon on this codebase...
+
+{Reactions}
+😂 (3) 
+
+[12/30/2024 10:38] _karanel
+I spent like 5 hours on this one. Just keeping up with the chat now xD
+
+
+[12/30/2024 10:44] saurabh_0312
+any lows ?
+
+{Reactions}
+🇳 🇴 
+
+[12/30/2024 13:33] anmol.eth
+You might find something...
+
+
+[12/30/2024 13:38] _karanel
+Nah, will do some other contest now.
+
+
+[12/30/2024 17:22] adriro
+hey guys, could you clarify which chains will be supported? the docs are a bit unclear:
+
+> Ethereum,Arbitrum,Avax,Base,BSC,Optimism,Polygon,OtherAny EVM chain, including L2s. The contestants should not consider zkEVM chains and other EVM-like chains (such as TRX).
+
+
+[12/30/2024 18:07] somtee4791
+Has this been previously audited? Feels so but I can't find the audit docs
+
+
+[12/30/2024 21:28] melanie_1034
+It says you need to KYC to be eligible for awards but when you try to certify on code4rena it says kyc isn't available right now
+
+
+[12/31/2024 01:22] 0xhuntoor
+Chainlink will reach you in dm, and kyc manually for non kyced people
+
+
+[12/31/2024 12:14] vahdrak1
+HM awards: $80,700 in USDC. What happens if there is no H or M at the end? Will the $80,700 be added to other prize pools?
+
+
+[12/31/2024 12:16] mushow
+https://docs.code4rena.com/awarding/incentive-model-and-awards/curve-logic#if-there-are-no-valid-hm-findings
+
+{Embed}
+https://docs.code4rena.com/awarding/incentive-model-and-awards/curve-logic
+Ranked curve model | Code4rena
+
+{Reactions}
+thankyou 
+
+[12/31/2024 14:43] saurabh_0312
+so  is it confirmed that there are no H or M in the codebase
+
+
+[12/31/2024 14:57] _karanel
+even if there are it won't be revealed, as the submissions will remain private for this one.
+
+
+[12/31/2024 23:46] melanie_1034
+Thank you!!!
+
+{Reactions}
+💙 
+
+[01/03/2025 20:02] C4
+**🚨 AUDIT ALERT**
+
+@🐺Wardens  The **Chainlink Payment Abstraction** audit is now closed! 
+What's next: The sponsor team and judge will review the findings over the next couple of weeks. 
+
+Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+{Reactions}
+❤️ (4) 
+
+[01/03/2025 20:05] bigsam0831
+Thanks
+
+{Reactions}
+🫡 (2) 
+
+[01/04/2025 06:03] mgnfy_view
+How many findings submitted? 👀
+
+
+[01/04/2025 07:25] saurabh_0312
+hope my findings are valid ..
+
+
+[01/04/2025 08:17] benrai
+500
+
+
+[01/04/2025 13:02] myrault_
+how did you know? can sr see findings now?
+
+
+[01/04/2025 13:53] benrai
+You go to the audit page and click on "View Dashboard". Not sure if everybody can see it
+
+
+[01/04/2025 15:05] myrault_
+
+
+{Attachments}
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/image-0DEBD.png
+
+
+[01/04/2025 15:07] myrault_
+If it is here, I really can't find the View Dashboard button. It seems that only SR permissions can be used.
+
+
+[01/04/2025 15:22] a_kalout
+you need to have the backstage role, https://docs.code4rena.com/roles/certified-contributors/sr-backstage-wardens
+
+{Embed}
+https://docs.code4rena.com/roles/certified-contributors/sr-backstage-wardens
+Security Researcher role (formerly +backstage wardens) | Code4rena
+
+
+[01/05/2025 07:59] agent3bood
+How can I see my submissions? I can't remember if I posted all my findings or not
+
+
+[01/05/2025 10:13] saurabh_0312
+go to findings =>> chainlink payment
+
+{Reactions}
+👍 
+
+[01/05/2025 10:13] saurabh_0312
+all your submission will be listed
+
+
+[01/05/2025 11:06] debof_
+Hi @CloudEllie Team named 0xCodeRedFinders is not listed and we submitted a QA report.
+
+
+[01/05/2025 11:38] no.one7777
+how many findings ?
+
+
+[01/05/2025 12:05] superman_i4g
+https://discord.com/channels/810916927919620096/1314194084776120391/1325015356078690336
+
+
+[01/05/2025 13:27] myrault_
+
+
+{Attachments}
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/image-6D28C.png
+
+
+[01/05/2025 13:29] myrault_
+I applied for and passed the backstage role half a year ago. At that time, after any competition was over, I could directly see all the findings waiting for review in GitHub, but now it suddenly doesn't work. Do you know why? I submitted a Code4rena Help Desk Request, but I haven't received a response yet. Does the current SR role replace the backstage role at that time, so I need to reapply?
+
+
+[01/05/2025 13:33] myrault_
+
+
+{Attachments}
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/image-9EC6F.png
+
+
+[01/05/2025 13:34] myrault_
+I would like to ask, if I have a backstage role or SR role, when you log in to GitHub, will you see more teams here?
+
+
+[01/05/2025 13:58] al_qa_qa
+You don't have it, as it is not a badge in your profile. Since you are certified, you can apply for it. Just mention one of Code4rena moderatators and he will guide you. But in general chat server not this server.
+
+
+[01/05/2025 14:39] myrault_
+OK, I understand. Thank you.
+
+{Reactions}
+🫡 
+
+[01/06/2025 04:04] shahen.0000
+Hey if you dont mind, can you tell me how can i know wthr my submission is accepted for report or not , will it be shown in the dashboard in my c4 account?
+
+
+[01/06/2025 09:55] al_qa_qa
+Yea, this can be viewed in PJQA
+
+
+[01/06/2025 09:55] al_qa_qa
+But this is for SR role
+
+
+[01/06/2025 13:03] mang0.eth
+@CloudEllie  hello  。Why is there no feedback on what I submitted? My registered name on code4rena is Mang0
+
+
+[01/06/2025 13:07] cloudellie
+As @Al-Qa-qa mentioned above, only SR wardens have visibility on comments at this stage.
+
+
+[01/06/2025 13:09] mang0.eth
+So how do I know if my report is approved? I just found out today that the bounties have been allocated.
+
+
+[01/06/2025 13:13] mang0.eth
+so how can i get SR role？I don't know if my report is worth the bounty。 thank you for your reply
+
+
+[01/06/2025 13:13] cloudellie
+Awards for Chainlink's other audit can be viewed in the #chainlink-nov1 channel. This particular audit just closed 3 days ago so the customer review phase is still underway.
+
+
+[01/06/2025 13:14] mang0.eth
+I don't have permission to access this link. This is my first time submitting a report in code4rena。
+
+
+[01/06/2025 13:24] cloudellie
+apologies, I've corrected the link.
+
+
+[01/08/2025 06:49] 0xrochimaru
+@CloudEllie If I submitted an issue in QA report but it is accepted as a Medium for other users. Will I get the reward for it?
+
+
+[01/08/2025 10:17] 0xhuntoor
+no
+
+{Reactions}
+🥲 (2) 
+
+[01/08/2025 10:18] 0xhuntoor
+sponsor review ended already?, maybe both issues are invalid, so no sadness there
+
+
+[01/08/2025 10:20] 0xrochimaru
+hahah. Looking at it from a different angle 🔥
+
+{Reactions}
+😂 (2) 💙 
+
+[01/08/2025 11:56] cloudellie
+No - see the "Risk level upgrades/downgrades" notes in the [readme](https://github.com/code-423n4/2024-12-chainlink?tab=readme-ov-file#chainlink-payment-abstraction-audit-details).
+
+
+[01/11/2025 23:12] eravat
+How many valid issues in Chainlink payment abstraction?
+
+
+[01/12/2025 11:44] mgnfy_view
+Wen results?
+
+
+[01/12/2025 13:39] _karanel
+PJQA not started yet.
+
+
+[01/13/2025 20:36] sbh7518
+Any est for the results at 'Chainlink Payment Abstraction' ?
+
+
+[01/15/2025 20:49] sbh7518
+?
+
+
+[01/15/2025 21:11] y0ng0p3
+Pjqa is not finished yet
+
+
+[01/17/2025 05:52] 0xrochimaru
+How does the judging of QA report works? If 1 or more issues are invalid in the report does the whole report gets rejected??
+
+
+[01/17/2025 09:49] saurabh_0312
+I think each QA report get some +ve points for valid issues and -ve points for invalid
+Then all the QA are listed according to total points.
+Then grades for report are given
+
+
+[01/20/2025 04:53] visualbits
+https://tenor.com/view/pawchain-paw-pawswap-wen-wen-moon-gif-6931956123414019044
+
+{Embed}
+https://tenor.com/view/pawchain-paw-pawswap-wen-wen-moon-gif-6931956123414019044
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/pawchain-paw-DC965.png
+
+{Reactions}
+🇼 (2) 🇪 (2) 🇳 (2) ❓ (2) ❗ (2) 
+
+[01/20/2025 10:35] _karanel
+Should be soon, judge has responded to most pjqa comments, if not all.
+
+
+[01/20/2025 10:40] zanderbyte
+Hi, @CloudEllie!  How can we leave additional comments on the judges' responses to our PJQA arguments?
+
+
+[01/20/2025 13:06] cloudellie
+PJQA comments are closed after 48 hours. The judge will instruct staff to reopen comments if they have questions for the wardens.
+
+
+[01/20/2025 14:23] saurabh_0312
+any med and high in this contest
+i didnt found anything , should improve my skill
+
+
+[01/20/2025 14:57] _karanel
+Can't be disclosed. Also the report won't be published even after the results.
+
+
+[01/20/2025 15:08] 0xg03.14
+any special benfit for the wardens for the selected report
+
+
+[01/20/2025 16:12] tigerfrake
+Bigger bag, lol
+
+
+[01/20/2025 17:54] .gho0st__
+@CloudEllie sent you a fr please accept
+
+
+[01/20/2025 18:14] 0xrochimaru
+2 low findings are accepted for others but my lows are not listed in that category. Are they yet to be added or some get missed too sometimes??
+
+
+[01/20/2025 18:34] cloudellie
+If you have an issue, please submit a help desk request. Staff are off today for the US holiday, as announced in #📢・c4-updates last week.
+
+{Reactions}
+👍 
+
+[01/21/2025 07:12] codehunter99
+Started a thread.
+
+
+[01/21/2025 11:42] eravat
+I do not see any updates on my findings. I can only see  the way it was submitted as "submitted 24 days ago". So, can't make out whether accepted/rejected/pending etc.
+
+{Reactions}
+same (2) 
+
+[01/21/2025 12:48] visualbits
+You should have an backstage role (SR) to view the status of your findings.
+
+
+[01/21/2025 13:02] alexczm
+hey, while I don't use to debate the judge comments/decision this time I consider my issue was wrongly judged. Comments are closed. What option do I have to have the judge/ sponsor reconsider my finding?
+
+
+[01/21/2025 13:32] cloudellie
+Post-judging QA has closed, so if you did not submit a comment before the deadline, I’m afraid you’re out of luck.
+
+
+[01/21/2025 13:38] alexczm
+Wrongly judged after I provided PJQA comments.
+
+
+[01/21/2025 15:16] nuntax
+So if ur not a backstage sr ur just out of luck and gotta accept whatever decision judges have taken?
+
+{Reactions}
+💯 (2) 👍 
+
+[01/21/2025 15:28] nuntax
+Idk if I’m a fan of that tbh, I get that it’s a private audit but let wardens atleast see the statuses of their own findings
+
+{Reactions}
+👍 
+
+[01/21/2025 15:39] saikumar279
+This is my first contest.when or after how many days would I be able to see my submission status?
+
+
+[01/21/2025 15:54] 0xf40
+I don't like it either. Once my issue was incorrectly flagged as a duplicate of an invalid issue, and I had zero opportunity to react until the repo went public a few weeks after the contest ended.
+
+
+[01/21/2025 18:51] visualbits
+This is a private audit and must not be shared publicly!
+
+
+[01/22/2025 13:34] eravat
+Thanks
+
+
+[01/23/2025 17:54] vahdrak1
+If it is a private audit, can the SR see how much bounty each person received?
+
+
+[01/24/2025 12:35] 0xrochimaru
+Can we expect the results by the end of this month?
+
+
+[01/26/2025 11:36] chainsentry
+or end of this year atleast
+
+{Reactions}
+💀 (3) 👀 
+
+[01/27/2025 19:19] visualbits
+https://tenor.com/view/yoda-star-wars-gif-10940865116650073754
+
+{Embed}
+https://tenor.com/view/yoda-star-wars-gif-10940865116650073754
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/yoda-star-E6064.png
+
+
+[01/27/2025 19:21] kann_p
+https://tenor.com/view/i-dont-have-patience-patience-patience-i-dont-have-yoda-lightsaber-gif-25697453
+
+{Embed}
+https://tenor.com/view/i-dont-have-patience-patience-patience-i-dont-have-yoda-lightsaber-gif-25697453
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/i-dont-have-patience-patience-02036.png
+
+{Reactions}
+😂 
+
+[01/27/2025 21:04] cloudellie
+🤑 🎉  Awards for **Chainlink Payment Abstraction**:
+
+$2,521.11 in USDC » @_karanel
+$1,987.07 in USDC » @0xpiken
+$1,987.07 in USDC » @eLSeR17
+$3,550.23 in USDC » @adriro
+$1,987.07 in USDC » @0xleadwizard
+$1,987.07 in USDC » @serial-coder
+$1,987.07 in USDC » @carrotsmuggler
+$1,987.07 in USDC » @Beepidibop
+$1,987.07 in USDC » @SpicyMeatball
+$1,987.07 in USDC » SeveritySquad (@shealtielanz, @Somtee)
+$1,987.07 in USDC » @shaflow2
+$1,987.07 in USDC » @0xrex
+$1,987.07 in USDC » @Al-Qa-qa
+$1,987.07 in USDC » @0xlemon
+$1,987.07 in USDC » @visualbits
+$1,987.07 in USDC » @auditism
+$1,987.07 in USDC » @0xG0P1
+$1,987.07 in USDC » @Zeta
+$1,987.07 in USDC » @Fitro
+$1,987.07 in USDC » @0x11singh99
+$1,987.07 in USDC » @hals
+$1,987.07 in USDC » @zhuying
+$1,987.07 in USDC » @Timeless
+$1,987.07 in USDC » @zhanmingjing
+$1,987.07 in USDC » @0xAstronatey
+$1,987.07 in USDC » @Alex Zhang
+$1,987.07 in USDC » @oxait
+$1,987.07 in USDC » @Fon
+$1,987.07 in USDC » @Z3RO
+$1,987.07 in USDC » @Shahil Hussain
+$1,987.07 in USDC » @elhaj
+$1,987.07 in USDC » @SUPERMAN_I4G
+$1,987.07 in USDC » @sutter
+$1,987.07 in USDC » @TheNonce
+$1,987.07 in USDC » @checks
+$1,987.07 in USDC » @ElGreenGoblino
+$1,987.07 in USDC » @agent3bood
+$1,987.07 in USDC » @nun
+$1,987.07 in USDC » @saikumar279
+$1,335.11 in USDC » @Noured23
+$1,335.11 in USDC » @wafflewizard
+$1,042.11 in USDC » @peanuts
+$694.74 in USDC » @ZanyBonzy
+
+🏁 Findings summary
+--------------------------------------—
+0 High risk findings
+1 Med risk finding
+175 wardens contributed
+
+1st place: @_karanel
+Top Hunter: n/a
+Top Gatherer: multi-way tie
+Top QA report: @adriro
+
+Congratulations all!  💸 💸 💸
+
+- Awards will be distributed on Polygon within the next week. 
+- ⚠️ Awardees, be sure to [complete your tax reporting info](https://docs.code4rena.com/awarding/incentive-model-and-awards/awarding-process#tax-information-for-code4rena-contributors-wardens-judges-etc) if you haven't already. This must be completed within 30 days (i.e. before Wednesday, 26 February 2025) to receive your award distribution for this audit.
+- The leaderboard will be updated at a later date with these audit results. 
+- 🚨 @🐺Wardens As this was a private audit, all details regarding results and findings are confidential. There should be no discussions regarding the content of findings whatsoever.
+
+{Reactions}
+🔥 (21) 
+
+[01/27/2025 21:13] pascal9476
+A solo high would have completely destroyed this leaderboard 
+Can anyone estimate what a solo high would have earned and what the rest will earn ? 😅
+
+{Reactions}
+🔥 (5) 
+
+[01/27/2025 21:29] elser17
+Accepted tax information is enough condition to receive rewards?
+
+
+[01/27/2025 21:30] elser17
+@CloudEllie
+
+
+[01/27/2025 21:31] cloudellie
+Yes it is!
+
+{Reactions}
+👍 
+
+[01/27/2025 22:17] tusharr1411
+around ~ $69960 and rest less than $1
+
+
+[01/28/2025 00:22] adriro
+Thanks for sharing the results. Not sure if something changed lately but isn't this sorted by aggregated money anymore? Looks like I've earned a bit more than the first place.
+
+
+[01/28/2025 03:29] codehunter99
+Started a thread.
+
+
+[01/28/2025 03:38] adotsam.
+Hey, my name is not here. I strongly believe that the M that i submitted is a valid M. Can you please check if my M was valid or not and if it's valid then why my name isn't there
+
+
+[01/28/2025 03:42] elitpwner
+Whattt is it 175 wardens and 1 medium?
+
+
+[01/28/2025 03:44] adotsam.
+Can any SR please confirm?
+
+
+[01/28/2025 03:52] adotsam.
+@CloudEllie
+
+
+[01/28/2025 03:55] adotsam.
+Any SR online? please help 🙏
+
+
+[01/28/2025 04:05] 0xstalin
+Send me DM
+
+
+[01/28/2025 04:12] adotsam.
+🙏
+
+
+[01/28/2025 04:15] saikumar279
+@CloudEllie iam new to code4rena like will I be able to see now which submissions of mine are marked valid?
+
+
+[01/28/2025 04:16] elitpwner
+I am new too, when did you start?
+
+
+[01/28/2025 04:16] elitpwner
+(i started like a month ago with web3, shifting from web2 security lol)
+
+
+[01/28/2025 04:18] saikumar279
+I started giving contests from last month apart from that I was learning. Even I was doing web2 security before and still doing it 🙂
+
+
+[01/28/2025 04:19] elitpwner
+gg mate
+
+
+[01/28/2025 04:31] adotsam.
+may i know who's the judge of this contest?
+
+
+[01/28/2025 04:39] adotsam.
+@0xsomeone please check dm
+
+
+[01/28/2025 09:19] cloudellie
+This one was sorted manually so I may have messed up, sorry.
+
+
+[01/28/2025 09:20] codehunter99
+hello cloudellie i also need your help
+
+
+[01/28/2025 09:20] codehunter99
+i opened a thread
+
+
+[01/28/2025 09:23] cloudellie
+The results of this competition will remain private, as was indicated in the audit repo. 
+
+There was a very extensive post-judging QA period, as any SR warden can attest, wherein the judge and sponsor team carefully reviewed (and re-reviewed) the submissions. The judge’s decisions are final, and I’m afraid that with the particular terms of this audit, we will not be making the submissions or discussions public.
+
+{Attachments}
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/image0-F8A94.jpg
+
+
+[01/28/2025 09:26] codehunter99
+mine are not because have have talked to other auditors who found them valid and conclusive so just say we dont want to work anymore,there was a problem with my format maybe that lead to the problem
+
+
+[01/28/2025 09:27] sp1cymeatball
+https://tenor.com/view/oprah-gif-13136161200304612855
+
+{Embed}
+https://tenor.com/view/oprah-gif-13136161200304612855
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/oprah-BE3AA.png
+
+{Reactions}
+😂 (15) 💯 
+
+[01/28/2025 09:27] sp1cymeatball
+you get $1987
+you get $1987
+you get $1987
+
+
+[01/28/2025 09:28] codehunter99
+i told my problem to Jay from C4 and she said wait for the announcements
+
+
+[01/28/2025 09:28] codehunter99
+so I waited
+
+
+[01/28/2025 09:29] codehunter99
+Started a thread.
+
+
+[01/28/2025 09:31] codehunter99
+As long as I am not answer I have no option except to violet this rule
+
+
+[01/28/2025 09:31] codehunter99
+Give me answers
+
+
+[01/28/2025 09:34] cloudellie
+I can appreciate your frustration but this is absolutely not how we do things here. Check the code of conduct and the good citizen clause in the docs.
+
+
+[01/28/2025 09:37] codehunter99
+code of conduct goes both ways it is known in cyber-security that if the team you are auditing for do not give you and adequate response.You are allowed to publish your finds for the safety of the greater good
+
+
+[01/28/2025 09:38] codehunter99
+should I teach you your job
+
+
+[01/28/2025 09:48] codehunter99
+i need a response from the judge and triagger if we reach a common understanding then case closed
+
+
+[01/28/2025 10:07] codehunter99
+Arrange me to talk to these guys @0xsomeone was the judge 
+@kingNFT is the triagger and the chainlink team within 24 hours
+
+
+[01/28/2025 10:08] codehunter99
+I was told by JAY | C4 to wait till results were published
+
+
+[01/28/2025 10:22] bytes032
+@codehunter99 We won't be arranging you anything. The findings and the audit report will remain private for the customer as mentioned.
+
+If you decide to make these public without Code4rena's and Chainlink's consent, then we're simply going to ban you.
+
+
+[01/28/2025 10:24] codehunter99
+then I will sue you,im not broke either...I work for the greater good not Code4rena
+
+{Reactions}
+😂 (24) 🤡 (15) 🤣 (4) 
+
+[01/28/2025 10:24] bytes032
+Feel free to proceed as you wish.
+
+{Reactions}
+💀 (6) 
+
+[01/28/2025 12:13] saurabh_0312
+how will i know that my QA report got selected
+
+
+[01/28/2025 12:19] cloudellie
+The wardens who submitted the [top 3 QA reports](https://docs.code4rena.com/awarding/incentive-model-and-awards#ranks-for-qa-and-gas-reports) are listed in the [award announcement](https://discord.com/channels/810916927919620096/1314194084776120391/1333543205484105728).
+
+
+[01/28/2025 12:20] saurabh_0312
+only top 3 are selected , if my name is not there my report is rejected , am i right
+
+
+[01/28/2025 12:20] cloudellie
+Yes, not necessarily "rejected" in the sense of being judged invalid, but only the top 3 are awarded.
+
+
+[01/28/2025 12:21] saurabh_0312
+i am asking that what if my report get B grade how to know that
+
+
+[01/28/2025 12:29] cloudellie
+For this particular audit, because the submissions will remain private, I'm afraid that non-SR wardens won't have visibility on the evaluations. 
+
+Typically, we make all of the submissions (and their evaluations) public when the report is published, but this audit has special privacy constraints.
+
+
+[01/28/2025 12:30] saurabh_0312
+😭
+
+
+[01/29/2025 05:54] agent3bood
+gg everybody
+
+
+[01/29/2025 05:55] agent3bood
+I had more QA reports in my repo but did not submit it on time 
+I need better time organization next audit
+
+
+[01/29/2025 08:57] donkicha
+The finding will be private, right?
+
+{Reactions}
+✅ (3) 
+
+[01/31/2025 03:41] 0xrochimaru
+what is the expected timeline to receive the payouts?
+
+
+[01/31/2025 11:11] cloudellie
+Usually they go out within a week of the announcement, so long as you've submitted your tax info.
+
+{Reactions}
+✅ (4) 
+
+[02/03/2025 04:05] 0xg03.14
+Has anyone been paid?
+
+{Reactions}
+➖ 
+
+[02/03/2025 09:54] cloudellie
+I'll check on this
+
+
+[02/03/2025 10:16] 0xg03.14
+Any update..?
+
+
+[02/03/2025 11:32] zeroisabot
+nah, i've not been paid too
+
+
+[02/04/2025 10:11] visualbits
+8 days passed 🤔
+
+
+[02/04/2025 10:56] jvorex
+i believe it goes out today. seen funds moving onchain
+
+{Reactions}
+👍 🧐 (3) 
+
+[02/05/2025 05:21] visualbits
+Any update on this?
+
+
+[02/05/2025 17:35] _karanel
+Is there going to be another round of kyc for the rewards?
+
+
+[02/05/2025 17:42] cloudellie
+No, submitting tax information is sufficient
+
+
+[02/06/2025 00:32] alexzhang8602
+@CloudEllie I didn't receive payment yet. When is it available?
+
+
+[02/06/2025 03:55] 0x_shahil_hussain
+i received my payment 2 hours ago
+
+
+[02/06/2025 03:56] 0x_shahil_hussain
+Leaderboard update wen?
+
+
+[02/06/2025 06:30] cloudellie
+Has payment come through for you yet?
+
+
+[02/06/2025 06:58] ivanfitro
+I received the payment too
+
+{Reactions}
+hi5 
+
+[02/06/2025 08:43] zmj4107
+without tax information, could not receive the payment?
+
+
+[02/06/2025 08:52] cloudellie
+correct. Tax information is required to receive any payments from Code4rena.
+
+
+[02/06/2025 08:54] zmj4107
+tried several times, "Something went wrong!"
+
+
+[02/06/2025 08:54] zmj4107
+region limits?
+
+
+[02/06/2025 09:01] zmj4107
+
+
+{Attachments}
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/image-07724.png
+
+
+[02/06/2025 09:20] zmj4107
+
+
+{Attachments}
+Code4rena - ARCHIVE-PUBLIC - chainlink-payment-dec [1314194084776120391].txt_Files/image-2E2F6.png
+
+
+[02/06/2025 10:39] cloudellie
+Thanks for flagging, will reply in #login-and-registration-help
+
+
+[02/08/2025 01:43] zmj4107
+I submit my tax information yesterday, when could i receive my payment please?@CloudEllie
+
+
+[02/10/2025 14:31] thebrittfactor
+We sent the first batch of awards on Feb 5th. The next batch will be sent once the 30-day window (Feb 26) has passes. More details on our awarding schedule can be reviewed [here](https://docs.code4rena.com/awarding/incentive-model-and-awards/awarding-process#award-distribution-requirements-and-schedule).
+
+
+[02/11/2025 00:46] zmj4107
+got it, thank you for your reply
+
+{Reactions}
+hi5 
+
+[02/24/2025 15:44] itsmetechjay
+ℹ️ This channel is pending archive.   As a result, any private threads will be permanently deleted in 03/07/2025 15:39. Please make sure to grab anything you might need before then.
+
+
+[02/28/2025 01:06] zmj4107
+When will the second batch of awards will sent out please?
+
+
+[03/06/2025 23:59] itsmetechjay
+ℹ️ Reminder: this channel will be deleted after 24 hours.
+
+
+==============================================================
+Exported 229 message(s)
+==============================================================
